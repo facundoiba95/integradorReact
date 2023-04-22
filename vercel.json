@@ -12,11 +12,6 @@
         "src": "/leagueArgentina/(.*)",
         "dest": "https://api-football-v1.p.rapidapi.com/v3/"
       }
-    ],
-    "rewrites": [
-      { "source": "/api/(.*)", "destination": "/api/$1" },
-      { "source": "/footballapi/(.*)", "destination": "/footballapi/$1" },
-      { "source": "/leagueArgentina/(.*)", "destination": "/leagueArgentina/$1" }
-    ]
+    ]    
   }
   
