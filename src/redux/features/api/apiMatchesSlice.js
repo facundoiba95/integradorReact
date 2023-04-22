@@ -5,9 +5,13 @@ const options = {
     method: "GET",
     headers: {
         'X-Auth-Token': import.meta.env.VITE_API_KEY_FOOTBALLDATA,
-    }
+        'Access-Control-Allow-Origin': '*'
+    },
+    mode: 'cors',
   }
   
+  
+
 const optionsApiArgentina = {
 	method: 'GET',
 	headers: {
@@ -15,6 +19,7 @@ const optionsApiArgentina = {
 		'X-RapidAPI-Host': 'api-football-v1.p.rapidapi.com'
 	}
 };
+
 
 const initialState= {
     content: [],
@@ -35,7 +40,7 @@ export const fetchMatches = createAsyncThunk(
         try {
             // MODIFICAR HORA UTC -3
           
-           const connect = await fetch(`/footballapi/v4/competitions/${idLeague}/matches`,options)
+           const connect = await fetch(`/footballapi/competitions/${idLeague}/matches`,options)
            const res = [ await connect.json() ];
            const matches = res[0].matches.map(item => {
              return { ... item, date: item.utcDate.slice(0,10), hour: item.utcDate.slice(11,16) }
