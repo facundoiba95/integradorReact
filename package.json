@@ -24,5 +24,10 @@
     "@vitejs/plugin-react": "^3.1.0",
     "http-proxy-middleware": "^2.0.6",
     "vite": "^4.2.0"
-  }
+  },
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api/$1" },
+    { "source": "/footballapi/(.*)", "destination": "/footballapi/$1" },
+    { "source": "/leagueArgentina/(.*)", "destination": "/leagueArgentina/$1" }
+  ]
 }
