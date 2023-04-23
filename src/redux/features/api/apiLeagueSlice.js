@@ -10,10 +10,18 @@ export const fetchApiLeagues = createAsyncThunk(
     'content/fetchContent',
     async () => {
         try {
-            const idLeague = localStorage.getItem('idLeague');
-            const connect = await fetch(`/api/sports/v1/classifications/current/?site=8&type=10&tournament=0${idLeague}`);
-            const res = [await connect.json()];
-            return res[0].data[0];
+            const getIdLocalStorage = localStorage.getItem('idLeague')
+            const dataIdLeague= JSON.stringify({ idLeague: getIdLocalStorage });
+
+            const connect = await fetch(`${import.meta.env.VITE_URL_BACKEND}/leagues/getLeaguesByID`,{
+                method: "POST",
+                headers: {
+                    "Content-Type" : "application/json"
+                },
+                body: dataIdLeague
+            });
+            const res = await connect.json();
+            return res;
         } catch (error) {
             console.log(error);
             return;

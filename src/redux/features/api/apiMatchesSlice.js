@@ -1,23 +1,4 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { useEffect } from "react";
-
-const options = {
-    method: "GET",
-    headers: {
-        'X-Auth-Token': import.meta.env.VITE_API_KEY_FOOTBALLDATA,
-    },
-  }
-  
-  
-
-const optionsApiArgentina = {
-	method: 'GET',
-	headers: {
-		'X-RapidAPI-Key': import.meta.env.VITE_API_KEY_RAPIDAPI,
-		'X-RapidAPI-Host': 'api-football-v1.p.rapidapi.com'
-	}
-};
-
 
 const initialState= {
     content: [],
@@ -36,16 +17,18 @@ export const fetchMatches = createAsyncThunk(
     'content/fetchMatches',
     async (idLeague) => {
         try {
-    
-           const connect = await fetch(`/footballapi/competitions/${idLeague}/matches`,options)
+           const dataIdLeague = JSON.stringify({idLeague});
 
-           const res = [ await connect.json() ];
-
-           const matches = res[0].matches.map(item => {
-             return { ... item, date: item.utcDate.slice(0,10), hour: item.utcDate.slice(11,16) }
+           const connect = await fetch(`${import.meta.env.VITE_URL_BACKEND}/matches/getMatchesLeagues`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json"
+              },
+              body: dataIdLeague
            })
 
-           return matches;
+           const res = await connect.json();
+           return res;
         } catch (error) {
             console.log(error);
         }
@@ -56,17 +39,16 @@ export const fetchMatchesToday = createAsyncThunk(
     'content/fetchMatchesToday',
     async (idLeague) => {
         try {
-            const connect = await fetch(`/footballapi/competitions/${idLeague}/matches`,options)
-            const res = [ await connect.json() ];
-            const date = new Date().toISOString().slice(0,10);
-            
-            const matches = res[0].matches.map(item => {
-                const localHour = `${item.utcDate.slice(11,13) - 3}${item.utcDate.slice(13,16)}` 
-                return { ... item, date: item.utcDate.slice(0,10), hour: localHour }
+            const dataIdLeague = JSON.stringify({idLeague});
+            const connect = await fetch(`${import.meta.env.VITE_URL_BACKEND}/matches/getMatchesLeaguesToday`,{
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: dataIdLeague
             })
-
-            const filterMatchesToday =  matches.filter(match => match.date === date);
-            return filterMatchesToday;
+            const res = await connect.json();
+            return res;
         } catch (error) {
             console.log(error);
         }
@@ -77,17 +59,15 @@ export const fetchMatchesArgentina = createAsyncThunk(
     'content/fetchMatchesArgentina',
     async () => {
         try {
-           const date = new Date().toISOString().slice(0,10);
-           const connect = await fetch(`/leagueArgentina/fixtures?date=${date}&league=128&season=2023`, optionsApiArgentina)
-           const res = [await connect.json()];
-
-           const matches = res[0].response.map(item => {
-            const localHour = `${item.fixture.date.slice(11,13) - 3}${item.fixture.date.slice(13,16)}` 
-            return { ... item, date: item.fixture.date.slice(0,10), hour: localHour }
+           const connect = await fetch(`${import.meta.env.VITE_URL_BACKEND}/matches/getMatchesLeagueArgentina`,{
+            method: "POST",
+            headers: {
+                "Content-Type" : "application/json"
+            }
            })
-           localStorage.setItem('ligaArgentina', JSON.stringify(matches))
-           return matches;
- 
+           const res = await connect.json();
+           localStorage.setItem('ligaArgentina', JSON.stringify(res))
+           return res;
         } catch (error) {
             console.log(error);
         }

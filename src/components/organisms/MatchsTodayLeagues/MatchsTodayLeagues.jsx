@@ -5,6 +5,7 @@ import TitleContainer from '../../atoms/TitleContainer/TitleContainer';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchMatchesToday } from '../../../redux/features/api/apiMatchesSlice';
 import Loader from '../../molecules/Loader/Loader';
+import { v4 as uuidv4 } from 'uuid';
 
 const MatchsTodayLeagues = ({titleLeague, idLeague, handleState}) => {
     const isLoading = useSelector(state => state.apiMatches.isLoading);
@@ -21,7 +22,7 @@ const MatchsTodayLeagues = ({titleLeague, idLeague, handleState}) => {
         const imgHome = match.homeTeam ? match.homeTeam.crest : match.teams.home.logo;
         const imgAway = match.awayTeam ? match.awayTeam.crest : match.teams.away.logo;
         const progress = match.status == 'IN_PLAY' ? 'LIVE' : match.status == 'FINISHED' ? 'FINISHED' :  match.status == 'PAUSED' ? 'PAUSED' :'';
-        
+      
         return (
           <CardMatch 
             teamHome={teamHome}
@@ -36,6 +37,7 @@ const MatchsTodayLeagues = ({titleLeague, idLeague, handleState}) => {
             homeScore={homeScore}
             awayScore={awayScore}
             status={progress}
+            key={uuidv4()}
           />
         )
       })
@@ -44,6 +46,7 @@ const MatchsTodayLeagues = ({titleLeague, idLeague, handleState}) => {
     useEffect(()=> {
       dispatch(fetchMatchesToday(idLeague))
     },[ dispatch ])
+
   return (
     <>
     <TitleContainer>{titleLeague}</TitleContainer>
