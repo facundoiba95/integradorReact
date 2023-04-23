@@ -19,7 +19,7 @@ export const fetchMatches = createAsyncThunk(
         try {
            const dataIdLeague = JSON.stringify({idLeague});
 
-           const connect = await fetch(`${import.meta.env.VITE_URL_BACKEND}/matches/getMatchesLeagues`, {
+           const connect = await fetch(`${import.meta.env.VITE_URL_BACKEND}matches/getMatchesLeagues`, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json"
@@ -40,7 +40,7 @@ export const fetchMatchesToday = createAsyncThunk(
     async (idLeague) => {
         try {
             const dataIdLeague = JSON.stringify({idLeague});
-            const connect = await fetch(`${import.meta.env.VITE_URL_BACKEND}/matches/getMatchesLeaguesToday`,{
+            const connect = await fetch(`${import.meta.env.VITE_URL_BACKEND}matches/getMatchesLeaguesToday`,{
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -59,7 +59,7 @@ export const fetchMatchesArgentina = createAsyncThunk(
     'content/fetchMatchesArgentina',
     async () => {
         try {
-           const connect = await fetch(`${import.meta.env.VITE_URL_BACKEND}/matches/getMatchesLeagueArgentina`,{
+           const connect = await fetch(`${import.meta.env.VITE_URL_BACKEND}matches/getMatchesLeagueArgentina`,{
             method: "POST",
             headers: {
                 "Content-Type" : "application/json"
