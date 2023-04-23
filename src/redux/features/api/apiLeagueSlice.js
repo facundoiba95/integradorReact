@@ -13,7 +13,7 @@ export const fetchApiLeagues = createAsyncThunk(
             const getIdLocalStorage = localStorage.getItem('idLeague')
             const dataIdLeague= JSON.stringify({ idLeague: getIdLocalStorage });
 
-            const connect = await fetch(`${import.meta.env.VITE_URL_BACKEND}/leagues/getLeaguesByID`,{
+            const connect = await fetch(`${import.meta.env.VITE_URL_BACKEND}leagues/getLeaguesByID`,{
                 method: "POST",
                 headers: {
                     "Content-Type" : "application/json"
