@@ -5,9 +5,7 @@ const options = {
     method: "GET",
     headers: {
         'X-Auth-Token': import.meta.env.VITE_API_KEY_FOOTBALLDATA,
-        'Access-Control-Allow-Origin': '*'
     },
-    mode: 'cors',
   }
   
   
@@ -38,13 +36,15 @@ export const fetchMatches = createAsyncThunk(
     'content/fetchMatches',
     async (idLeague) => {
         try {
-            // MODIFICAR HORA UTC -3
-          
+    
            const connect = await fetch(`/footballapi/competitions/${idLeague}/matches`,options)
+
            const res = [ await connect.json() ];
+
            const matches = res[0].matches.map(item => {
              return { ... item, date: item.utcDate.slice(0,10), hour: item.utcDate.slice(11,16) }
            })
+
            return matches;
         } catch (error) {
             console.log(error);
@@ -66,7 +66,6 @@ export const fetchMatchesToday = createAsyncThunk(
             })
 
             const filterMatchesToday =  matches.filter(match => match.date === date);
-            console.log(filterMatchesToday);
             return filterMatchesToday;
         } catch (error) {
             console.log(error);

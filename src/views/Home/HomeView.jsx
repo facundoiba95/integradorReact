@@ -36,7 +36,6 @@ const HomeView = () => {
     setInterval(()=> {
       dispatch(fetchMatchesArgentina())
    },900000)
-
     if(ligaArgentinaLocalStorage.length){
       return;
     } else {
