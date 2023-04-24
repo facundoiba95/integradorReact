@@ -10,7 +10,7 @@ const RankingTable = () => {
   const rankingLeagues = useSelector(state => state.apiLeagues.content);
   const isLoading = useSelector(state => state.apiLeagues.isLoading);
   const dispatch = useDispatch();
- 
+  
   const renderItemRanking = () => {
     if(rankingLeagues[0] === undefined) return; // Condicion para que al cargar no tire error undefined
     return rankingLeagues[0].rank.map(team => {

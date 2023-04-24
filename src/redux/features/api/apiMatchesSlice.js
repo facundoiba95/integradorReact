@@ -24,6 +24,7 @@ export const fetchMatches = createAsyncThunk(
               headers: {
                 "Content-Type": "application/json"
               },
+              mode:'cors',
               body: dataIdLeague
            })
 
@@ -45,10 +46,12 @@ export const fetchMatchesToday = createAsyncThunk(
                 headers: {
                     "Content-Type": "application/json"
                 },
+                mode:'cors',
                 body: dataIdLeague
             })
+            
             const res = await connect.json();
-            return res;
+            return res.filterMatchesToday;
         } catch (error) {
             console.log(error);
         }
@@ -66,8 +69,8 @@ export const fetchMatchesArgentina = createAsyncThunk(
             }
            })
            const res = await connect.json();
-           localStorage.setItem('ligaArgentina', JSON.stringify(res))
-           return res;
+           localStorage.setItem('ligaArgentina', JSON.stringify(res.matches))
+           return res.matches;
         } catch (error) {
             console.log(error);
         }

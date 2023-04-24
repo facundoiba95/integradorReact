@@ -48,7 +48,7 @@ const HomeView = () => {
        {/* <MatchsRandom/> */}
        <NavbarLeagues/>   
        <MatchsTodayLeagues titleLeague={'Liga Profesional Argentina'}  handleState={ligaArgentinaLocalStorage.length ? ligaArgentinaLocalStorage : ligaArgentina}/>
-       <MatchsTodayLeagues titleLeague={'Premier League'} idLeague={2021} handleState={premierLeague}/> 
+       <MatchsTodayLeagues titleLeague={'Premier League'} idLeague={2021} handleState={premierLeague}/>  
        <MatchsTodayLeagues titleLeague={'Serie A'} idLeague={2019} handleState={serieA}/>
        <MatchsTodayLeagues titleLeague={'Liga Española'} idLeague={2014} handleState={laLiga}/>
        <Button handleFunction={goMatchs} title={'Ver mas ligas'}/>

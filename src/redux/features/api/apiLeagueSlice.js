@@ -18,10 +18,11 @@ export const fetchApiLeagues = createAsyncThunk(
                 headers: {
                     "Content-Type" : "application/json"
                 },
+                mode:'cors',
                 body: dataIdLeague
             });
             const res = await connect.json();
-            return res;
+            return res.resApi.data;
         } catch (error) {
             console.log(error);
             return;
@@ -36,7 +37,7 @@ export const apiLeagueSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder.addCase(fetchApiLeagues.fulfilled, ( state, action ) => {
-            state.content = [action.payload]
+            state.content = action.payload
             state.isLoading = false
             return state;
         })
