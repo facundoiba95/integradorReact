@@ -24,7 +24,6 @@ export const fetchMatches = createAsyncThunk(
               headers: {
                 "Content-Type": "application/json"
               },
-              mode:'cors',
               body: dataIdLeague
            })
 
@@ -46,7 +45,6 @@ export const fetchMatchesToday = createAsyncThunk(
                 headers: {
                     "Content-Type": "application/json"
                 },
-                mode:'cors',
                 body: dataIdLeague
             })
             
