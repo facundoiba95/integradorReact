@@ -2,29 +2,31 @@ import React, { useEffect } from 'react'
 import { NavLeaguesItemStyle, NavLeaguesStyle } from './NavbarLeaguesStyles'
 import { useDispatch } from 'react-redux'
 import { fetchApiLeagues } from '../../../redux/features/api/apiLeagueSlice';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const NavbarLeagues = () => {
 const navigator = useNavigate()
 const dispatch = useDispatch();
+const params = useParams();
 
-const goRankingLeagues = (e) => {
+const goLeagues = (e) => {
    const id = Number(e.target.dataset.idleague);
-   localStorage.setItem('idLeague', id)
-   dispatch(fetchApiLeagues())
+   params.idLeague = id;
+   localStorage.setItem('idLeague', params.idLeague);
+  //  dispatch(fetchApiLeagues(params.idLeague));
    window.scrollTo(0,0)
-   navigator('/ranking/league')
+   navigator(`/leagues/${params.idLeague}`)
 }
 
   return (
     <NavLeaguesStyle>
-        <NavLeaguesItemStyle onClick={(e) => goRankingLeagues(e)} data-idleague='152'>LIGA ARGENTINA</NavLeaguesItemStyle>       
-        <NavLeaguesItemStyle onClick={(e) => goRankingLeagues(e)} data-idleague='103'>CHAMPIONS LEAGUE</NavLeaguesItemStyle>
-        <NavLeaguesItemStyle onClick={(e) => goRankingLeagues(e)} data-idleague='109'>LIGUE 1</NavLeaguesItemStyle>
-        <NavLeaguesItemStyle onClick={(e) => goRankingLeagues(e)} data-idleague='107'>SERIE A</NavLeaguesItemStyle>
-        <NavLeaguesItemStyle onClick={(e) => goRankingLeagues(e)} data-idleague='165'>COPA LIBERTADORES</NavLeaguesItemStyle>
-        <NavLeaguesItemStyle onClick={(e) => goRankingLeagues(e)} data-idleague='106'>PREMIER LEAGUE</NavLeaguesItemStyle>
-        <NavLeaguesItemStyle onClick={(e) => goRankingLeagues(e)} data-idleague='122'>LA LIGA</NavLeaguesItemStyle>
+        <NavLeaguesItemStyle onClick={(e) => goLeagues(e)} data-idleague='152'>LIGA ARGENTINA</NavLeaguesItemStyle>       
+        <NavLeaguesItemStyle onClick={(e) => goLeagues(e)} data-idleague='103'>CHAMPIONS LEAGUE</NavLeaguesItemStyle>
+        <NavLeaguesItemStyle onClick={(e) => goLeagues(e)} data-idleague='109'>LIGUE 1</NavLeaguesItemStyle>
+        <NavLeaguesItemStyle onClick={(e) => goLeagues(e)} data-idleague='107'>SERIE A</NavLeaguesItemStyle>
+        <NavLeaguesItemStyle onClick={(e) => goLeagues(e)} data-idleague='165'>COPA LIBERTADORES</NavLeaguesItemStyle>
+        <NavLeaguesItemStyle onClick={(e) => goLeagues(e)} data-idleague='106'>PREMIER LEAGUE</NavLeaguesItemStyle>
+        <NavLeaguesItemStyle onClick={(e) => goLeagues(e)} data-idleague='122'>LA LIGA</NavLeaguesItemStyle>
     </NavLeaguesStyle>
   )
 }

@@ -12,6 +12,7 @@ import FeedView from "../views/Feed/FeedView";
 import NavbarHeader from "../components/organisms/NavbarHeader/NavbarHeader";
 import Matchs from "../views/Matchs/Matchs";
 import Footer from "../components/organisms/Footer/Footer";
+import LeaguesView from "../views/Leagues/LeaguesView";
 
 const Routes = () => {
   return (
@@ -22,12 +23,12 @@ const Routes = () => {
         <Route path='/register' element={<RegisterView/>}/>
         <Route path='/login' element={<LoginView/>}/>
         <Route path='/fixture' element={<FixtureView/>}/>
-        <Route path='/rankingLeague' element={<RankingView/>}/>
+        <Route path='/ranking/leagues' element={<RankingView/>}/>
         <Route path='/profile' element={<ProfileView/>}/>
         <Route path='/feed' element={<FeedView/>}/>
         <Route path='/matchs' element={<Matchs/>}/>
         <Route path='/matchs/leagues' element={<Matchs/>}/>
-        <Route path='/ranking/league' element={<RankingView/>}/>
+        <Route path='/leagues/:idLeague' element={<LeaguesView/>}/>
     </RoutesRouterDom>
     <Footer/>
     </BrowserRouter>

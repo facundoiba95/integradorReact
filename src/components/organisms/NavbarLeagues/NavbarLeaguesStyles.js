@@ -2,8 +2,9 @@ import styled from "styled-components";
 
 export const NavLeaguesStyle = styled.nav`
 width:100%;
-height:40px;
-background-color: #2E2E2D;
+height:50px;
+background-color:#2e2e2e10;
+backdrop-filter: blur(10px);
 margin-top: 0rem;
 display:flex;
 justify-content:space-around;

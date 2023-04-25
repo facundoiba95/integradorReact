@@ -1,16 +1,24 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { useParams } from "react-router-dom";
 
 const initialState = {
     content:[],
+    league1:[],
+    serieA:[],
+    premierLeague:[],
+    libertadores:[],
+    championsLeague:[],
+    ligaArgentina:[],
+    laLiga:[],
     isLoading:false,
     error: null
 };
 
 export const fetchApiLeagues = createAsyncThunk(
     'content/fetchContent',
-    async () => {
+    async (idLeague) => {
         try {
-            const getIdLocalStorage = localStorage.getItem('idLeague')
+            const getIdLocalStorage = idLeague ? idLeague : localStorage.getItem('idLeague') 
             const dataIdLeague= JSON.stringify({ idLeague: getIdLocalStorage });
 
             const connect = await fetch(`${import.meta.env.VITE_URL_BACKEND}leagues/getLeaguesByID`,{
@@ -21,6 +29,7 @@ export const fetchApiLeagues = createAsyncThunk(
                 mode:'cors',
                 body: dataIdLeague
             });
+
             const res = await connect.json();
             return res.resApi.data;
         } catch (error) {
@@ -37,7 +46,39 @@ export const apiLeagueSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder.addCase(fetchApiLeagues.fulfilled, ( state, action ) => {
-            state.content = action.payload
+            switch (action.meta.arg){
+                case 106:
+                    state.premierLeague = action.payload
+                    localStorage.setItem('premierLeagueRanking',JSON.stringify(state.premierLeague))
+                    break;
+                case 165:
+                    state.libertadores = action.payload;
+                    localStorage.setItem('libertadoresRanking',JSON.stringify(state.libertadores))
+                    break;
+                case 103:
+                    state.championsLeague = action.payload;
+                    localStorage.setItem('championsLeagueRanking',JSON.stringify(state.championsLeague))
+                    break;
+                case 107:
+                    state.serieA = action.payload;
+                    localStorage.setItem('serieARanking',JSON.stringify(state.serieA))
+                    break;
+                case 109: 
+                    localStorage.setItem('league1Ranking',JSON.stringify(state.league1))
+                    state.league1 = action.payload;
+                    break;
+                case 122:
+                    state.laLiga = action.payload;
+                    localStorage.setItem('laLigaRanking',JSON.stringify(state.laLiga))
+                    break;
+                case 152:
+                    state.ligaArgentina = action.payload;
+                    localStorage.setItem('ligaArgentinaRanking',JSON.stringify(state.ligaArgentina))
+                    break;
+                default:
+                    state.content = action.payload;
+                    break;
+            }
             state.isLoading = false
             return state;
         })
@@ -51,6 +92,7 @@ export const apiLeagueSlice = createSlice({
             return state;
         })
 
+        builder
     }
 })
 

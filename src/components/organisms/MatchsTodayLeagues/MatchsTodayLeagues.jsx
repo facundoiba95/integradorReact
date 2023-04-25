@@ -12,6 +12,7 @@ const MatchsTodayLeagues = ({titleLeague, idLeague, handleState}) => {
     const dispatch = useDispatch();
     
     const renderItemsMatchesToday = () => {
+      if(handleState.length >= 1){
       return handleState.map( match => {
         const { hour, date } = match;
         const teamHome = match.homeTeam === undefined ? match.teams.home.name : match.homeTeam.name;
@@ -41,6 +42,11 @@ const MatchsTodayLeagues = ({titleLeague, idLeague, handleState}) => {
           />
         )
       })
+    } else {
+      return (
+        <h4 style={{fontFamily:'Raleway'}}>{`Hoy no hay partidos en ${titleLeague}`}</h4>
+      )
+    }
     }
 
     useEffect(()=> {

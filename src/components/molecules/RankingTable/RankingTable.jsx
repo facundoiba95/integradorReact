@@ -5,15 +5,19 @@ import { useDispatch, useSelector } from 'react-redux'
 import iconFutbol from '../../../../iconFutbol.png'
 import Loader from '../Loader/Loader'
 import { fetchApiLeagues } from '../../../redux/features/api/apiLeagueSlice'
+import { leagueStates } from '../../../libs/getLeagueStates'
+import { useParams } from 'react-router-dom'
 
-const RankingTable = () => {
-  const rankingLeagues = useSelector(state => state.apiLeagues.content);
+const RankingTable = ({idLeague}) => {
   const isLoading = useSelector(state => state.apiLeagues.isLoading);
   const dispatch = useDispatch();
+  const dataLeague = useSelector(state => state.apiLeagues[leagueStates[idLeague]]);
+  const params = useParams();
+
   
-  const renderItemRanking = () => {
-    if(rankingLeagues[0] === undefined) return; // Condicion para que al cargar no tire error undefined
-    return rankingLeagues[0].rank.map(team => {
+  const renderItemRanking = (dataLeague) => {
+    if(dataLeague[0] === undefined) return; // Condicion para que al cargar no tire error undefined
+    return dataLeague[0].rank.map(team => {
       const name = team.fullName;
       const imgUrl = team.images.urlLogo[1] ? team.images.urlLogo[1] : iconFutbol;
       const { drawn, lost, played, points, position, won } = team.standing;
@@ -38,15 +42,15 @@ const RankingTable = () => {
     })
   }
 
-  const renderNameLeague = () => {
-    if(rankingLeagues[0] === undefined) return;
-    return rankingLeagues[0].classificationHead.tournament.name;
+  const renderNameLeague = (dataLeague) => {
+    if(dataLeague[0] === undefined) return;
+    return dataLeague[0].classificationHead.tournament.name;
   }
 
 
-  useEffect(()=> {
-    dispatch(fetchApiLeagues())
-  }, [])
+  useEffect(() => {
+    dispatch(fetchApiLeagues(idLeague))
+ }, [ params.idLeague ])
 
 
   return (
@@ -54,8 +58,8 @@ const RankingTable = () => {
     { isLoading === true
     ? <Loader/>
     : <>
-       <TitleContainer>{renderNameLeague()}</TitleContainer>
        <ContainerTableStyle>
+       <TitleContainer>{renderNameLeague(dataLeague)}</TitleContainer>
           <TitleRankingStatsStyle>
             <small>Jugados</small>
             <small>Ganados</small>
@@ -63,7 +67,7 @@ const RankingTable = () => {
             <small>Empatados</small>
             <small>Puntos</small>
           </TitleRankingStatsStyle>
-          { renderItemRanking() }
+          { renderItemRanking(dataLeague) }
        </ContainerTableStyle>  
     </>}
     

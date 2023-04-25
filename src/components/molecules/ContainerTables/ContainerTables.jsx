@@ -1,18 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { TableContainerStyle } from './ContainerTablesStyles'
+import { ApiContext } from '../../../context/ApiContext'
 
 const ContainerTables = ({children}) => {
-
-
-    /*
-           VER API CONTEXT PARA PASAR PROPS DE ESTILOS
-
-           isAll = TRUE / FALSE
-    */
-
+  const { isAll } = useContext(ApiContext);
 
   return (
-    <TableContainerStyle isAll={false}>
+    <TableContainerStyle isAll={isAll}>
         {children}
     </TableContainerStyle>
   )

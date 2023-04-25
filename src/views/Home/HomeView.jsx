@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import MatchsRandom from '../../components/organisms/MatchsRandom/MatchsRandom'
 import MatchsTodayLeagues from '../../components/organisms/MatchsTodayLeagues/MatchsTodayLeagues'
 import Button from '../../components/atoms/Button/Button'
@@ -7,13 +7,20 @@ import NavbarLeagues from '../../components/organisms/NavbarLeagues/NavbarLeague
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchMatchesArgentina } from '../../redux/features/api/apiMatchesSlice'
 import Loader from '../../components/molecules/Loader/Loader'
+import RankingView from '../Ranking/RankingView'
+import { ApiContext } from '../../context/ApiContext'
+import { fetchApiLeagues } from '../../redux/features/api/apiLeagueSlice'
+import RankingTable from '../../components/molecules/RankingTable/RankingTable'
+import ContainerTables from '../../components/molecules/ContainerTables/ContainerTables'
 
 const HomeView = () => {
   const navigator = useNavigate();;
   const goMatchs = () => navigator('/matchs/leagues');
+  const goRanking = () => navigator('/ranking/leagues');
   const isLoading = useSelector(state => state.apiMatches.isLoading);
+  const { isAll, setIsAll } = useContext(ApiContext);
 
-  //states Leagues
+  //states matches leagues
   const premierLeague = useSelector(state => state.apiMatches.premierLeague);
   const laLiga = useSelector(state => state.apiMatches.laLiga);
   const serieA = useSelector(state => state.apiMatches.serieA);
@@ -21,6 +28,9 @@ const HomeView = () => {
   const ligaArgentina = useSelector(state => state.apiMatches.ligaArgentina);
   const dispatch = useDispatch();
 
+  //state ranking leagues
+  const championsLeagueRanking = useSelector(state => state.apiLeagues.championsLeague);
+  const libertadoresRanking = useSelector(state => state.apiLeagues.libertadores);
 /*
 
       VERIFICAR SI LOS PARTIDOS SON DE LA FECHA ACTUAL
@@ -32,10 +42,10 @@ const HomeView = () => {
 */
 
    useEffect(() => {
-    setInterval(()=> {
-      dispatch(fetchMatchesArgentina())
-   },900000)
-   
+  //   setInterval(()=> {
+  //     dispatch(fetchMatchesArgentina())
+  //  },900000)
+    setIsAll(true)
     if(ligaArgentinaLocalStorage.length){
       return;
     } else {
@@ -52,6 +62,16 @@ const HomeView = () => {
        <MatchsTodayLeagues titleLeague={'Serie A'} idLeague={2019} handleState={serieA}/>
        <MatchsTodayLeagues titleLeague={'Liga Española'} idLeague={2014} handleState={laLiga}/>
        <Button handleFunction={goMatchs} title={'Ver mas ligas'}/>
+
+       <div style={{marginTop:'3rem', marginBottom:'1rem'}}>
+       <ContainerTables isAll={isAll}>
+         <RankingTable idLeague={103} />
+         <RankingTable idLeague={165} />
+       </ContainerTables>
+       </div>
+       <Button handleFunction={goRanking} title={'Ver mas tablas'}/>
+
+       
     </>
   )
 }
