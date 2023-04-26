@@ -11,7 +11,16 @@ margin:0 auto;
 gap:20px;
 text-align:center;
 
+
 h1{
     background-color:green;
+}
+
+@media (max-width: 850px) {
+grid-template-columns: 1fr;
+width:90%;
+min-width:390px;
+align-content:center;
+justify-content:center;
 }
 `

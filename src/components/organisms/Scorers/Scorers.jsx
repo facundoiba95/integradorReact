@@ -36,22 +36,20 @@ const Scorers = () => {
 
 
   return (
-    <div>
  <TableContainerStyles>
   <thead className='headTable'>
     <tr className='head'>
       <th className='th'>Rank</th>
       <th className='th'>Jugador</th>
       <th className='th'>Equipo</th>
-      <th className='th'>Asistencias</th>
-      <th className='th'>Goles</th>
+      <th className='th'>A</th>
+      <th className='th'>G</th>
     </tr>
   </thead>
   <tbody>
     {renderScorers(dataScore)}
   </tbody>
 </TableContainerStyles>
-    </div>
   )
 }
 

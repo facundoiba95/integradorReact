@@ -1,21 +1,17 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { NavLeaguesItemStyle, NavLeaguesStyle } from './NavbarLeaguesStyles'
-import { useDispatch } from 'react-redux'
-import { fetchApiLeagues } from '../../../redux/features/api/apiLeagueSlice';
 import { useNavigate, useParams } from 'react-router-dom';
 
 const NavbarLeagues = () => {
 const navigator = useNavigate()
-const dispatch = useDispatch();
 const params = useParams();
 
 const goLeagues = (e) => {
    const id = Number(e.target.dataset.idleague);
    params.idLeague = id;
    localStorage.setItem('idLeague', params.idLeague);
-  //  dispatch(fetchApiLeagues(params.idLeague));
    window.scrollTo(0,0)
-   navigator(`/leagues/${params.idLeague}`)
+   navigator(`/leagues/${params.idLeague}/ranking`)
 }
 
   return (

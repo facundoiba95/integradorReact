@@ -1,11 +1,19 @@
 import styled from "styled-components";
+import { useParams } from "react-router-dom";
+import { logoLeaguesByIdLeague } from "../../../libs/getLogosLeagues";
 
 export const TableContainerStyles = styled.table`
 width: 100%;
 max-width:800px;
-min-width:700px;
+min-width:350px;
 height:100%;
 border:none;
+/* background-color:#15161a10;*/
+backdrop-filter: blur(80px); 
+/* background-image: url(${() => logoLeaguesByIdLeague[useParams().idLeague]});  */
+/* background-repeat: no-repeat;
+background-position:100%;
+background-size: contain; */
 
 .headTable {
     /* background-color:red; */
@@ -28,8 +36,13 @@ border:none;
     padding:10px;
     border-bottom:1px solid gray;
 }
+
 .tr:nth-child(-n+3){
-    background-color:#202124;
+    background-color:#46c26720;
+}
+
+.tr:nth-child(1){
+    font-weight:800;
 }
 
 .td.team{
@@ -41,6 +54,12 @@ border:none;
 .td.team img{
    width:20px;
    margin-right:10px;
+}
+
+@media (max-width:850px){
+    width:90%;
+    min-width:390px;
+    margin:0 auto;
 }
 
 `

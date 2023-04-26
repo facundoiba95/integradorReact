@@ -13,6 +13,7 @@ display: flex;
 justify-content:center;
 align-items:center;
 gap:50px;
+z-index: 1000;
 `
 
 export const SelectStyles = styled(Select)`

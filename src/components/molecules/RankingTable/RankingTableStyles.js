@@ -3,15 +3,73 @@ import styled from "styled-components";
 export const ContainerTableStyle = styled.ul`
 width:100%;
 height:100%;
+min-width:390px;
 display:flex;
 gap:10px;
 flex-direction:column;
 background-color:#333436;
 border-radius:5px;
-gap:10px;
-padding:10px;
+
 font-family:'Poppins';
 font-weight:300;
+margin:0 auto;
+
+.tableContainer{
+    width: 100%;
+    max-width:800px;
+    min-width:300px;
+    height:100%;
+    border:none;
+    margin:0 auto;
+}
+.headTable {
+    /* background-color:red; */
+    text-align:left;
+}
+
+.head{
+    color:yellow;
+    height:40px;
+    background-color:none;
+}
+
+.th{
+    padding-left:10px;
+    background-color:#575859;
+}
+.th:nth-child(n+3):nth-child(-n+7) {
+    text-align:center;
+}
+
+.td{
+    height:25px;
+    padding:5px;
+}
+
+
+
+.td.team{
+    display:flex;
+    justify-content:left;
+    align-items:center;
+    gap:10px;
+    height:100%;
+}
+.td.team img{
+   width:20px;
+   margin-right:10px;
+}
+
+@media (max-width:850px) {
+    width:90%;
+    min-width:390px;
+    .tableContainer{
+        width:90%;
+        min-width:390px;
+        padding-left:5px;
+    }
+}
+
 `
 export const ItemTableStyle = styled.li`
 width:100%;

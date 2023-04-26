@@ -1,4 +1,4 @@
-import { Routes as RoutesRouterDom, Route, BrowserRouter } from "react-router-dom";
+import { Routes as RoutesRouterDom, Route, BrowserRouter, useParams } from "react-router-dom";
 import React from 'react'
 
 //Vistas
@@ -13,6 +13,7 @@ import NavbarHeader from "../components/organisms/NavbarHeader/NavbarHeader";
 import Matchs from "../views/Matchs/Matchs";
 import Footer from "../components/organisms/Footer/Footer";
 import LeaguesView from "../views/Leagues/LeaguesView";
+import RankingTableByLeague from "../components/organisms/RankingTableByLeague/RankingTableByLeague";
 
 const Routes = () => {
   return (
@@ -28,7 +29,8 @@ const Routes = () => {
         <Route path='/feed' element={<FeedView/>}/>
         <Route path='/matchs' element={<Matchs/>}/>
         <Route path='/matchs/leagues' element={<Matchs/>}/>
-        <Route path='/leagues/:idLeague' element={<LeaguesView/>}/>
+        <Route path='/leagues/:idLeague/ranking' element={<LeaguesView/>}/>
+        <Route path='/leagues/:idLeague/scorers' element={<LeaguesView/>}/>
     </RoutesRouterDom>
     <Footer/>
     </BrowserRouter>
