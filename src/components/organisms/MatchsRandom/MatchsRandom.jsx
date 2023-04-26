@@ -2,8 +2,8 @@ import React from 'react';
 import ContainerCards from '../../molecules/ContainerCards/ContainerCards';
 import CardMatch from '../../molecules/CardMatch/CardMatch';
 import TitleContainer from '../../atoms/TitleContainer/TitleContainer';
-import imgURLAway from '../../../assets/iconBarcelona.jpg';
-import imgURLHome from '../../../assets/iconMadrid.png';
+// import imgURLAway from '../../../assets/iconBarcelona.jpg';
+// import imgURLHome from '../../../assets/iconMadrid.png';
 
 const MatchsRandom = () => {
   const date = new Date().toLocaleDateString('es-es',{ month:'short', day:'numeric' })
@@ -11,7 +11,7 @@ const MatchsRandom = () => {
     <>
     <TitleContainer>Algunos partidos de hoy</TitleContainer>
     <ContainerCards>
-        <CardMatch 
+        {/* <CardMatch 
         teamHome={'Real Madrid'}
         teamAway={'FC Barcelona'}
         hour={'18:45'}
@@ -57,7 +57,7 @@ const MatchsRandom = () => {
         success={true}
         result={'1-0'}
         imgURLHome={imgURLHome}
-        imgURLAway={imgURLAway}/>
+        imgURLAway={imgURLAway}/> */}
     </ContainerCards>
     </>
     

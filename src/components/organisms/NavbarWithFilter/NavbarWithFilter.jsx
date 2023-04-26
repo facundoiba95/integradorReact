@@ -7,7 +7,6 @@ import { fetchApiLeagues } from '../../../redux/features/api/apiLeagueSlice';
 
 const NavbarWithFilter = () => {
   const param = useParams();
-  const dispatch = useDispatch();
   const navigator = useNavigate();
 
   const options = [
@@ -23,7 +22,6 @@ const NavbarWithFilter = () => {
   
   const goLeague = (e) => {
     param.idLeague = Number(e.value);
-    // dispatch(fetchApiLeagues(param.idLeague));
     window.scrollTo(0,0)
     navigator(`/leagues/${param.idLeague}`)
  }

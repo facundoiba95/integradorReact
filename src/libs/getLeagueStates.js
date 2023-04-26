@@ -7,3 +7,5 @@ export const leagueStates = {
   122: "laLiga",
   152: "ligaArgentina"
 };
+
+// estos codigos son para la api de unidadeditorial.org
