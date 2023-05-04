@@ -1,5 +1,6 @@
 import React from 'react';
 import { CardContainerStyle } from './CardMatchStyles';
+import { useNavigate, useParams } from 'react-router-dom';
 
 
 const CardMatch = ({ 
@@ -15,10 +16,22 @@ const CardMatch = ({
   homeScore,
   awayScore,
   imgURLHome,
-  imgURLAway
+  imgURLAway,
+  isBet,
+  idMatch
  }) => {
+  const navigator = useNavigate();
+  const params = useParams();
+
+  const goProde = (e) => {
+     const idMatch = e.target.dataset.idmatch;
+     params.idMatch = idMatch;
+     window.scrollTo(0,0)
+     navigator(`/prode/league/${params.idLeague}/${params.idMatch}`)
+     
+  }
   return (
-    <CardContainerStyle status={status}>
+    <CardContainerStyle status={status} isBet={isBet}>
         <span className='dateMatch'>
           <h4>{hour}</h4>
           <p>{date}</p>
@@ -27,7 +40,7 @@ const CardMatch = ({
         <div className='containerTeam'>
             <span className='teamsMatchHome'>
               <img src={imgURLHome} alt="image from team 1" />
-              <p>{teamHome}</p>
+              <p className='nameTeam'>{teamHome}</p>
             </span>
             <span className='status'>
               <p className='vs'>{ 'VS' }</p>
@@ -39,12 +52,13 @@ const CardMatch = ({
             </span>
             <span className='teamsMatchAway'>
               <img src={imgURLAway} alt="image from team 2" />
-              <p>{teamAway}</p>
+              <p className='nameTeam'>{teamAway}</p>
             </span>
         </div>
         <span className='containerBets'> 
           <small>Bets: {quantityBets}</small>
         </span>
+        <small className='goBet' data-idmatch={idMatch} onClick={(e) => goProde(e)}>{isBet}</small>
     </CardContainerStyle>
   )
 }

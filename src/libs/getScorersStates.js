@@ -1,4 +1,4 @@
-export const scorersStates = {
+export const scorersStates = {  // codigos para api unidad editorial.org
     106: "PL",
     165: "CLI",
     103: "CL",

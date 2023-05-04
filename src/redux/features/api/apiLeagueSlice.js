@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { useParams } from "react-router-dom";
+import { leagueStates } from "../../../libs/getLeagueStates";
 
 const initialState = {
     content:[],
@@ -46,53 +47,22 @@ export const apiLeagueSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder.addCase(fetchApiLeagues.fulfilled, ( state, action ) => {
-            switch (action.meta.arg){
-                case 106:
-                    state.premierLeague = action.payload
-                    localStorage.setItem('premierLeagueRanking',JSON.stringify(state.premierLeague))
-                    break;
-                case 165:
-                    state.libertadores = action.payload;
-                    localStorage.setItem('libertadoresRanking',JSON.stringify(state.libertadores))
-                    break;
-                case 103:
-                    state.championsLeague = action.payload;
-                    localStorage.setItem('championsLeagueRanking',JSON.stringify(state.championsLeague))
-                    break;
-                case 107:
-                    state.serieA = action.payload;
-                    localStorage.setItem('serieARanking',JSON.stringify(state.serieA))
-                    break;
-                case 109: 
-                    localStorage.setItem('league1Ranking',JSON.stringify(state.league1))
-                    state.league1 = action.payload;
-                    break;
-                case 122:
-                    state.laLiga = action.payload;
-                    localStorage.setItem('laLigaRanking',JSON.stringify(state.laLiga))
-                    break;
-                case 152:
-                    state.ligaArgentina = action.payload;
-                    localStorage.setItem('ligaArgentinaRanking',JSON.stringify(state.ligaArgentina))
-                    break;
-                default:
-                    state.content = action.payload;
-                    break;
+            if(action.meta.arg){
+                state[leagueStates[action.meta.arg]] = action.payload;
+                localStorage.setItem(`${leagueStates[action.meta.arg]}`, JSON.stringify(leagueStates[action.meta.arg]));
+                state.isLoading = false;
             }
-            state.isLoading = false
-            return state;
+            state.content = action.payload;
         })
         builder.addCase(fetchApiLeagues.pending, ( state, action ) => {
             state.isLoading = true;
-            return state;
+            return;
         })
         builder.addCase(fetchApiLeagues.rejected, ( state, action ) => {
             state.isLoading = false;
             state.error = action.error.message
-            return state;
+            return;
         })
-
-        builder
     }
 })
 

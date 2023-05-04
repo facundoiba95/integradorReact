@@ -1,7 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { matchesStates } from "../../../libs/getLeagueStates";
 
 const initialState= {
-    content: [],
+    matchesLeague: [],
     league1:[],
     libertadores:[],
     serieA:[],
@@ -17,8 +18,8 @@ export const fetchMatches = createAsyncThunk(
     'content/fetchMatches',
     async (idLeague) => {
         try {
-           const dataIdLeague = JSON.stringify({idLeague});
-
+           const dataIdLeague = JSON.stringify({idLeague: Number(idLeague)});
+          
            const connect = await fetch(`${import.meta.env.VITE_URL_BACKEND}matches/getMatchesLeagues`, {
               method: "POST",
               headers: {
@@ -26,9 +27,39 @@ export const fetchMatches = createAsyncThunk(
               },
               body: dataIdLeague
            })
-
            const res = await connect.json();
-           return res;
+           const resArray = res.matches;
+
+           const rewriteResponse = resArray.map(match => {
+                if(match.competition.type === 'CUP'){
+                    return match;
+                } else {
+                    return { ... match, 
+                        previusMatchday: match.season.currentMatchday - 1,
+                        nextMatchday: match.season.currentMatchday + 1
+                    }
+                } 
+           })
+           
+           localStorage.setItem('matchesLeague', JSON.stringify(rewriteResponse))
+
+            const currentMatchday = rewriteResponse.filter(match => match.matchday === match.season.currentMatchday)
+            const previusMatchday = rewriteResponse.filter(match => match.previusMatchday === match.matchday)
+            const nextMatchday = rewriteResponse.filter(match => match.nextMatchday === match.matchday)
+            const nextMatchDayCup = rewriteResponse.filter(match => {
+                if(match.competition.type === 'CUP' && match.stage === 'SEMI_FINALS' && match.stage === 'FINAL'){
+                    return match; 
+                }
+            })
+            const scheduledMatchesCup = rewriteResponse.filter(matches => matches.status === 'TIMED')
+         
+           return {
+            currentMatchday,
+            previusMatchday,
+            nextMatchday,
+            scheduledMatchesCup,
+            rewriteResponse
+           };
         } catch (error) {
             console.log(error);
         }
@@ -60,15 +91,53 @@ export const fetchMatchesArgentina = createAsyncThunk(
     'content/fetchMatchesArgentina',
     async () => {
         try {
-           const connect = await fetch(`${import.meta.env.VITE_URL_BACKEND}matches/getMatchesLeagueArgentina`,{
-            method: "POST",
-            headers: {
-                "Content-Type" : "application/json"
+        //    const connect = await fetch(`${import.meta.env.VITE_URL_BACKEND}matches/getMatchesLeagueArgentina`,{
+        //     method: "POST",
+        //     headers: {
+        //         "Content-Type" : "application/json"
+        //     }
+        //    })
+        //    const res = await connect.json();
+        //    const resArray = res.matches;
+        // //    const phase = 'match.league.round == ""';
+        //   const resArray = JSON.parse(localStorage.getItem('ligaArgentina'));
+          const date = new Date().toISOString().slice(0,10);
+          
+          const setPhase = resArray.map(match => {
+            return {... match, phase: match.league.round.substring(0,10)}
+          })
+          const PrimeraFase = setPhase.filter(match => match.phase == '1st Phase ')
+
+          const getMatchday = PrimeraFase.find(match =>  {
+            if(match.date == date  && match.phase == '1st Phase '){
+               return match.currentMatchday = Number(match.league.round.substring(12))
+            }
+        }).currentMatchday;
+
+
+           const newArray = PrimeraFase.map(match => {
+            const matchday = Number(match.league.round.substring(12)); 
+            return { ... match,
+                matchday,
+                currentMatchday: getMatchday,
+                previusMatchday: getMatchday - 1,
+                nextMatchday: getMatchday + 1,
             }
            })
-           const res = await connect.json();
-           localStorage.setItem('ligaArgentina', JSON.stringify(res.matches))
-           return res.matches;
+
+
+           
+           localStorage.setItem('ligaArgentina', JSON.stringify(newArray))
+
+           const currentMatchday = newArray.filter(match => match.matchday === match.currentMatchday)
+           const previusMatchday = newArray.filter(match => match.previusMatchday === match.matchday)
+           const nextMatchday = newArray.filter(match => match.nextMatchday === match.matchday)
+
+          return {
+           currentMatchday,
+           previusMatchday,
+           nextMatchday,
+          }        
         } catch (error) {
             console.log(error);
         }
@@ -90,8 +159,8 @@ export const apiMatchesSlice = createSlice({
             state.error = action.error.message;
             return state;
         })
-        builder.addCase(fetchMatches.fulfilled, ( state, action ) => {
-            state.content = action.payload ;
+        builder.addCase( fetchMatches.fulfilled, ( state, action ) => {
+            state.matchesLeague = action.payload;
             state.isLoading = false;
             return state;
         })
@@ -107,28 +176,12 @@ export const apiMatchesSlice = createSlice({
             return state;
         })
         builder.addCase(fetchMatchesToday.fulfilled, ( state, action ) => {
-            switch (action.meta.arg) {
-                case 2015:
-                    state.league1 = action.payload;
-                    break;
-                case 2019:
-                    state.serieA = action.payload;
-                    break;
-                case 2021:
-                    state.premierLeague = action.payload;
-                    break;
-                case 2001:
-                    state.championsLeague = action.payload;
-                    break;
-                case 2152:
-                    state.libertadores = action.payload;
-                    break;
-                case 2014:
-                    state.laLiga = action.payload;
-                    break;
-                default:
-                    break;
+            if(action.meta.arg){
+                state[matchesStates[action.meta.arg]] = action.payload;
+                state.isLoading = false;
+                return;
             }
+
             state.content =  action.payload;
             state.isLoading = false;
             return state;

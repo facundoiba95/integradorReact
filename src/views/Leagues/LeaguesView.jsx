@@ -11,6 +11,7 @@ import { fetchScorersByLeague, fetchScorersByLeagueArgentina } from '../../redux
 import Loader from '../../components/molecules/Loader/Loader';
 import { logoLeaguesByIdLeague } from '../../libs/getLogosLeagues';
 import Scorers from '../../components/organisms/Scorers/Scorers';
+import Fixture from '../../components/organisms/Fixture/Fixture';
 
 const LeaguesView = ({children}) => {
     const params= useParams();
@@ -19,46 +20,30 @@ const LeaguesView = ({children}) => {
     const navigator = useNavigate();
     const idLeague = Number(params.idLeague);
     const { isAll, setIsAll } = useContext(ApiContext);
-    const isLoading = useSelector(state => state.apiScorers.isLoading);
-
-    // const dataScore = useSelector(state => idLeague == 152 ? state.apiScorers.scorersByLeagueArgentina : state.apiScorers.scorersByLeague);
 
     // const localStorageScorersArgentina = JSON.parse(localStorage.getItem('scorersLeagueArgentina'))
     // const localStorageScorers = JSON.parse(localStorage.getItem('scorersLeague'))
     const handleRoutes = () => {
+
       if(location.pathname === `/leagues/${idLeague}/ranking`){
+        setIsAll(false);
         return (
-          <>
-          { isLoading 
-          ? <Loader/>
-          : <>
               <ContainerTables isAll={isAll}>
-               <RankingTable idLeague={idLeague}/>
+               <RankingTable idLeague={idLeague}/> 
               </ContainerTables> 
-          </>
-          }
-          </>
-       
         )
       } else if(location.pathname === `/leagues/${idLeague}/scorers`){
+        setIsAll(false);
           return (
-            <>
-            {
-              isLoading 
-              ? <Loader/>
-              : <Scorers/>
-            }
-            </>
+            <Scorers idLeague={idLeague}/>
           )
+      } else if(location.pathname === `/leagues/${idLeague}/fixture`){
+        return (
+          <Fixture idLeague={params.idLeague}/>
+        )
       }
     }
 
-    useEffect(()=> { 
-      setIsAll(false)
-      idLeague === 152
-      ? dispatch(fetchScorersByLeagueArgentina())
-      : dispatch(fetchScorersByLeague(scorersStates[ idLeague ]))
-   },[ idLeague ])
     
   return (
     <ContainerDefaultStyle>

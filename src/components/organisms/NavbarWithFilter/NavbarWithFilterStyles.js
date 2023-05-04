@@ -14,6 +14,42 @@ justify-content:center;
 align-items:center;
 gap:50px;
 z-index: 1000;
+
+.submenuIcon{
+  display:none;
+}
+.containerItemsNavbarFilter{
+  display:flex;
+  gap:50px;
+}
+
+
+@media (max-width:850px) {
+  justify-content: right;
+  padding-right:10px;
+
+  .containerItemsNavbarFilter{
+  position:absolute;
+  top:50px;
+  background-color:#2e2e2e90;
+  backdrop-filter: blur(10px);
+  visibility: ${props => props.isOpenSubmenu ? 'visible' : 'hidden'};
+  opacity:${props => props.isOpenSubmenu ? '1':'0'};
+  flex-direction:row;
+  width:${props => props.isOpenSubmenu ? '100%' : '0'};
+  height:30px;
+  justify-content:space-evenly;
+  align-items:center;
+  transition: all 0.2s ease-in-out;
+  height:40px;
+
+}
+.submenuIcon{
+  display:block;
+  width:25px;
+  height:25px;
+}
+}
 `
 
 export const SelectStyles = styled(Select)`

@@ -14,6 +14,7 @@ backdrop-filter: blur(80px);
 /* background-repeat: no-repeat;
 background-position:100%;
 background-size: contain; */
+margin: 0 auto;
 
 .headTable {
     /* background-color:red; */

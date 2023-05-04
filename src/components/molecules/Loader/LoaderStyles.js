@@ -8,6 +8,8 @@ justify-content:center;
 align-items:center;
 backdrop-filter: blur(10px);
 position: relative;
+margin: 0 auto;
+
 `
 
 export const LoaderBoxContainerStyle = styled.div`
@@ -19,6 +21,8 @@ align-items:center;
 height:400px;
 width:360px;
 gap:30px;
+margin: 0 auto;
+
 
 h2{
     font-family:'Poppins';

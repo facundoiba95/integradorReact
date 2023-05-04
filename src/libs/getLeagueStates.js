@@ -1,4 +1,4 @@
-export const leagueStates = {
+export const leagueStates = { // estos codigos son para la api de unidadeditorial.org
   106: "premierLeague",
   165: "libertadores",
   103: "championsLeague",
@@ -8,4 +8,13 @@ export const leagueStates = {
   152: "ligaArgentina"
 };
 
-// estos codigos son para la api de unidadeditorial.org
+export const matchesStates = { // estos codigos son para la api football data
+  2021: "premierLeague",
+  2152: "libertadores",
+  2001: "championsLeague",
+  2019: "serieA",
+  2015: "league1",
+  2014: "laLiga",
+  152:  "ligaArgentina"
+};
+

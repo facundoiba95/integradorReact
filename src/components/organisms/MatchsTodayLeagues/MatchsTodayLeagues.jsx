@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchMatchesToday } from '../../../redux/features/api/apiMatchesSlice';
 import Loader from '../../molecules/Loader/Loader';
 import { v4 as uuidv4 } from 'uuid';
+import ItemMatch from '../../molecules/ItemMatch/ItemMatch';
 
 const MatchsTodayLeagues = ({titleLeague, idLeague, handleState}) => {
     const isLoading = useSelector(state => state.apiMatches.isLoading);
@@ -59,9 +60,8 @@ const MatchsTodayLeagues = ({titleLeague, idLeague, handleState}) => {
     <ContainerCards >
         {isLoading 
         ? <Loader/>
-        : <>
-          {renderItemsMatchesToday()}
-        </>}
+        : <ItemMatch handleState={handleState} titleLeague={'asd'} idLeague={idLeague}/>
+}
     </ContainerCards>
     </>
     

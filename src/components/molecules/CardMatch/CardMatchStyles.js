@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const CardContainerStyle = styled.li`
 width:100%;
 max-width:700px;
+min-width:350px;
 height:75px;
 background-color:#29292b;
 border-radius:5px;
@@ -83,5 +84,53 @@ cursor: pointer;
     font-weight: 900;
     margin-top:0.5rem;
 }
+.goBet{
+    background-color:${props => props.isBet == 'Apostar' ? 'yellow' : ''};
+    position:absolute;
+    bottom:10px;
+    width:auto;
+    padding:2px;
+    border-radius:3px;
+    right:20px;
+    color:black;
+    font-weight:600;
+}
 
+@media (max-width:850px) {
+    height:170px;
+    width:95%;
+    
+    .dateMatch{
+        transform: translate(-50%);
+        left:50%;
+    }
+
+    .containerTeam{
+      gap:10px;
+    }
+
+    .teamsMatchHome, .teamsMatchAway{
+        flex-direction:column;
+        justify-content:flex-end;
+        align-items:center;
+        text-align:center;
+        gap:10px;
+        width:120px;
+    }
+    .nameTeam{
+        text-align:center;
+        width:120px;
+        white-space: break-spaces;
+    }
+
+    .goBet{
+        transform: translate(-50%);
+        left:50%;
+        width:80px;
+        text-align:center;
+    }
+}
+
+@media (max-width: 768px) {
+}
 `
