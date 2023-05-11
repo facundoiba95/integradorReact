@@ -57,7 +57,6 @@ img{
             display:flex;
             align-items:center;
             gap:10px;
-           
         }
 
         b{
@@ -101,6 +100,17 @@ img{
         align-items:center;
         gap:20px;
         margin:1.5rem 0;
+        background-color:#80808010;
+        padding:5px 0;
+
+        p{
+            text-align: center;
+            width:300px;
+        }
+        .vs{
+            text-align:center;
+            width:100px;
+        }
     }
 
     .teamHome{
@@ -130,6 +140,7 @@ img{
         padding-bottom:10px;
         padding-left:10px;
     }
+  
     
 }
 
@@ -137,6 +148,17 @@ img{
     .imgUser{
         left:50%;
     }
+    .teams{
+        p{
+            text-align: center;
+            width:150px;
+        }
+        .vs{
+            text-align:center;
+            width:30px;
+        }
+    }
+    
 }
 
 `

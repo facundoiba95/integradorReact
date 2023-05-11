@@ -72,6 +72,32 @@ const CardUser = () => {
           </>
       )
   } 
+
+  const renderWinner = (
+    searchBetted,
+    idMatch,
+    teamAway,
+    teamHome,
+    bettedFor
+  ) => {
+    if (searchBetted[0] && searchBetted[0].id === idMatch) {
+      const winner =
+        searchBetted[0].score.winner == 'AWAY_TEAM'
+          ? teamAway
+          : searchBetted[0].score.winner == 'HOME_TEAM'
+          ? teamHome
+          : searchBetted[0].score.winner == 'DRAW'
+          ? 'Empate'
+          : '';
+      if (searchBetted[0].score.winner == null) return 'Por jugar.';
+      if (bettedFor === winner) {
+        return 'Acertaste';
+      } else {
+        return 'No acertaste';
+      }
+     }
+  }
+      
     
     const renderBets = () => {
       const betItems = []; // crear un array vacío
@@ -104,27 +130,7 @@ const CardUser = () => {
           const newArray = leagueSelected.newArray;
           const searchBetted = newArray ? newArray.filter(match => match.fixture.id == idMatch) : 
                                           content ? content.filter(match => match.id == idMatch) : [];
-          const renderWinner = ( ) => {
-           if (searchBetted[0] && searchBetted[0].id === idMatch) {
-             const winner =
-               searchBetted[0].score.winner == 'AWAY_TEAM'
-                 ? teamAway
-                 : searchBetted[0].score.winner == 'HOME_TEAM'
-                 ? teamHome
-                 : searchBetted[0].score.winner == 'DRAW'
-                 ? 'Empate'
-                 : '';
-             if (searchBetted[0].score.winner == null) return 'Por jugar.';
-             if (bettedFor === winner) {
-               return 'Acertaste';
-             } else {
-               return 'No acertaste';
-             }
-            } else {
-              console.log('chau');
-            }
-         }
-                                            
+                                         
                                     
           betItems.push(
             <li className='itemListBets' key={idMatch}>
@@ -135,7 +141,7 @@ const CardUser = () => {
                     <img src={imgHome} alt="" />
                     {teamHome}
                   </p>
-                  <p>vs</p>
+                  <p className='vs'>vs</p>
                   <p className='teamAway'>
                     <img src={imgAway} alt="" />
                     {teamAway}
@@ -149,7 +155,7 @@ const CardUser = () => {
                  isPending 
                  ? <></>
                  : <>
-                     <p><b>Resultado: </b>{isLoading ? 'Loading ...' : renderWinner()}</p>
+                     <p><b>Resultado: </b>{isLoading ? 'Loading ...' : renderWinner( searchBetted,idMatch,teamAway,teamHome,bettedFor )}</p>
                      <Button title={'Ver resultado'} handleFunction={() => getWinnerMatch(idLeagueBetted)} />
                    </>
                 }
@@ -165,10 +171,8 @@ const CardUser = () => {
 
     const getWinnerMatch = (idLeague) => {
       if(idLeague == 128){
-        console.log('argentina');
         dispatch(fetchMatchesArgentina());
       } else if(idLeague != 128){
-        console.log('no es argentina');
         dispatch(fetchAllMatches(idLeague));
       }
     }
