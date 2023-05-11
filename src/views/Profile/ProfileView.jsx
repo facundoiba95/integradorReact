@@ -1,8 +1,12 @@
 import React from 'react'
+import { ContainerDefaultStyle } from '../Leagues/LeaguesViewStyles'
+import CardUser from '../../components/molecules/CardUser/CardUser'
 
 const ProfileView = () => {
   return (
-    <div>ProfileView</div>
+    <ContainerDefaultStyle>
+      <CardUser/>
+    </ContainerDefaultStyle>
   )
 }
 

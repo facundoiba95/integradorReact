@@ -29,17 +29,20 @@ const LoginView = () => {
     dispatch(loginUser(user));
   }
 
-        // UNA VEZ INICIADA LA SESION HAY DOS OPCIONES:
-        //     * Redirigir hacia la apuesta seleccionada anteriormente
-        //       si es que se selecciono una.
-        //     * Redirigir hacia el perfil del usuario
+  /*
+         Opciones segun inicio de sesion o registro de usuario:
+           ** Al seleccionar una apuesta **:
+             - Seleccionar apuesta ---> isLogged ? * true: Realizar apuesta! ---> Okay!
+                                                   * false: Login ---> Okay ? 'Volver a apuesta' : 'Mostrar error';
+                                                   * false: Register ---> Okay ? 'Volver a apuesta' : 'Mostrar error' 
+              
+
+             ** Al hacer click en 'Register' o 'Login' del Navbar Header **:
+                - Register ---> Okay ? '/profile/:idUser'
+                - Login ---> Okay ? /profile/:idUser
             
-        // PARA HACER:
-        //     - Estilos de Navbar al iniciar sesion.
-        //     - Estilos de Navbar en vista mobil
-        //     - Mantener la sesion iniciada en toda la app.
 
-
+*/
       useEffect(() => {
         if(isLogged == true){
           params.idUser = userLogged.sendUser._id;

@@ -1,6 +1,6 @@
 import React from 'react'
 import { HeaderItemStyle, HeaderListStyle, HeaderStyle } from './NavbarHeaderStyles';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { CgMenuGridO } from 'react-icons/cg';
 import { useContext } from 'react';
 import { ApiContext } from '../../../context/ApiContext';
@@ -12,6 +12,7 @@ import { logout } from '../../../redux/features/api/apiAuthSlice';
 const NavbarHeader = () => {
   const navigator = useNavigate();
   const dispatch = useDispatch();
+  const params = useParams();
   const { isOpenMenu, setIsOpenMenu } = useContext(ApiContext);
   const isLogged = useSelector(state => state.apiAuth.isLogged);
   const user = useSelector(state => state.apiAuth.user);
@@ -55,6 +56,14 @@ const NavbarHeader = () => {
      }
   }
 
+  const goProfileUser = (e) => {
+    setIsOpenMenu(false);
+    const idUser = e.target.dataset.iduser;
+    params.idUser = idUser;
+    window.scrollTo(0,0);
+    navigator(`/profile/${params.idUser}`)
+  }
+
   return (
     <HeaderStyle isOpenMenu={isOpenMenu} isLogged={isLogged}>
       <CgMenuGridO onClick={() => setIsOpenMenu(!isOpenMenu)} className='menuIcon'/>
@@ -70,8 +79,8 @@ const NavbarHeader = () => {
           <HeaderItemStyle onClick={goLogin} className='loginHeaderBtn'>Login</HeaderItemStyle>
         </HeaderListStyle>
         <HeaderListStyle className='iconsAccount'>
-          <h4>{isLogged ? user.sendUser.username : ''}</h4>
-          <img src={isLogged ? renderImg() : ''} alt="" />
+          <h4 onClick={(e)=> goProfileUser(e)} data-iduser={isLogged ? user.sendUser._id : ''}>{isLogged ? user.sendUser.username : ''}</h4>
+          <img src={isLogged ? renderImg() : ''} alt="" onClick={(e)=> goProfileUser(e)} data-iduser={isLogged ? user.sendUser._id : ''}/>
           <Button title={'Cerrar sesión'} handleFunction={() => handleLogout()}/>
         </HeaderListStyle>
       </span>

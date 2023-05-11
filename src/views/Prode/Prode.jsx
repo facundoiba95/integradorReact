@@ -1,19 +1,18 @@
 import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { fetchMatches } from '../../redux/features/api/apiMatchesSlice';
 import { ContainerDefaultStyle } from '../Leagues/LeaguesViewStyles';
 import CardBet from '../../components/molecules/CardBet/CardBet';
 
 const Prode = () => {
-  const params = useParams();
-  const dispatch = useDispatch();
-  const leaguesState = useSelector( state => state.apiMatches.matchesLeague);
-// const leaguesState = JSON.parse(localStorage.getItem('matchesLeague'))
-
+  const params= useParams();
+  const leaguesState = useSelector(state => state.apiMatches[params.idLeague == 152 ? "ligaArgentina" : "matchesLeague"]);
+  const rewriteResponse = leaguesState.rewriteResponse;
+  const newArray = leaguesState.newArray;
+  const filterMatchBet = rewriteResponse ? rewriteResponse.filter(match => match.id == params.idMatch) :
+                         newArray ? newArray.filter(match => match.fixture.id == params.idMatch) : [];
   const getMatch = () => {
-    const matchBet = leaguesState.rewriteResponse.filter(match => match.id == params.idMatch);
-    return matchBet.map(match => {
+    return filterMatchBet.map(match => {
       const { hour, date } = match;
       const teamHome = match.homeTeam === undefined ? match.teams.home.name : match.homeTeam.name;
       const teamAway = match.awayTeam === undefined ? match.teams.away.name : match.awayTeam.name;
@@ -27,13 +26,13 @@ const Prode = () => {
       const idMatch = match.id ;
       return (
         <CardBet 
-        imgURLHome={imgHome}
-        imgURLAway={imgAway}
-        teamHome={teamHome}
-        teamAway={teamAway}
-        date={date}
-        hour={hour}
-        key={idMatch}
+          imgURLHome={imgHome}
+          imgURLAway={imgAway}
+          teamHome={teamHome}
+          teamAway={teamAway}
+          date={date}
+          hour={hour}
+          key={idMatch}
         />
       )
     })

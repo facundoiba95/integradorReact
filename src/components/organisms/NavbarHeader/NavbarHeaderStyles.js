@@ -88,10 +88,15 @@ h1{
         justify-content:flex-start;
         padding-top:50px;
         width:100%;
+        
         /* background-color:#80808090; */
         img{
             width:150px;
             height:150px;
+            cursor: pointer;
+        }
+        h4{
+            cursor: pointer;
         }
 
         .btnLogout{

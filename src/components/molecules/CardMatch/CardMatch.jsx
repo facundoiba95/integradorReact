@@ -28,7 +28,6 @@ const CardMatch = ({
      params.idMatch = idMatch;
      window.scrollTo(0,0)
      navigator(`/prode/league/${params.idLeague}/${params.idMatch}`)
-     
   }
   return (
     <CardContainerStyle status={status} isBet={isBet}>

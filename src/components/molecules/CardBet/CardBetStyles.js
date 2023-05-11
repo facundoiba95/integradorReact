@@ -75,6 +75,7 @@ gap:2rem;
             font-size:15px;
             border-radius:3px;
             background-color:#9acE22;
+            cursor: pointer;
         }
 .buttonBet:nth-child(2){
     background-color:#9acE50;
