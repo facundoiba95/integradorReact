@@ -10,6 +10,7 @@ flex-direction:column;
 align-items:center;
 font-family:'Quicksand';
 gap:10px;
+background-color:${props => props.isFeed ? '#80808010' : 'none'};
 
 .imgLeague{
     width:180px;

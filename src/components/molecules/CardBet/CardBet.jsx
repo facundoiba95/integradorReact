@@ -30,7 +30,6 @@ const filterMatch = rewriteResponse ? rewriteResponse.filter(match => match.id =
                     newArray ? newArray.filter(match => match.fixture.id == params.idMatch) : [];
 
 const generateBet = async (e) => {
-  console.log(matchesLeagueState);
   if(isLogged){
     const valueWinner = e.target.dataset.winner;
     const bet = {

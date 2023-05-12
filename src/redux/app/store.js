@@ -4,6 +4,7 @@ import apiMatchesSlice from "../features/api/apiMatchesSlice";
 import apiScorersSlice from "../features/api/apiScorersSlice";
 import apiAuthSlice from "../features/api/apiAuthSlice";
 import apiBetSlice from "../features/api/apiBetSlice";
+import apiUserSlice from "../features/api/apiUserSlice";
 
 const store = configureStore({
     reducer:{
@@ -11,7 +12,8 @@ const store = configureStore({
         apiMatches: apiMatchesSlice,
         apiScorers: apiScorersSlice,
         apiAuth: apiAuthSlice,
-        apiBets: apiBetSlice
+        apiBets: apiBetSlice,
+        apiUsers: apiUserSlice
     }
 })
 
