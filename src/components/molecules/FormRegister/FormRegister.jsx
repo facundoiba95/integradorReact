@@ -50,7 +50,6 @@ const FormRegister = () => {
 
 
     useEffect(() => {
-        console.log(user)
     }, [ user ])
 
   return (

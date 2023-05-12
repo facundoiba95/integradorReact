@@ -13,6 +13,19 @@ const CardFeed = () => {
 
     const dispatch = useDispatch();
 
+    const timeToNew = (dateCreate) => {
+      const dateNowBet = new Date(); 
+      const diffInHours = Math.abs(dateNowBet - dateCreate) / 3600000;
+      const diffInMinutes = Math.abs(dateNowBet - dateCreate) / 60000;
+      
+       if(dateNowBet > dateCreate && diffInHours < 24){
+        if(dateNowBet > dateCreate && diffInMinutes < 60){
+          return `Hace ${Math.floor(diffInMinutes)} minutos.`
+         }
+         return `Hace ${Math.floor(diffInHours)} horas.`
+       }
+    }
+
     const renderBets = (match,users,dateToBet) => {
         const opciones = { 
           year: 'numeric', 
@@ -23,7 +36,7 @@ const CardFeed = () => {
 
         const dateCreatedBet = new Date(dateToBet.createdAt);
         const fechaFormateadaBet = dateCreatedBet.toLocaleDateString('es-MX',opciones);
-         
+
         const idLeagueBetted = match.competition == undefined ? match.league.id : match.competition.id;
         const { hour, date } = match;
         const teamHome = match.homeTeam === undefined ? match.teams.home.name : match.homeTeam.name;
@@ -40,7 +53,8 @@ const CardFeed = () => {
 
         return (
           <CardFeedContainerStyle key={match._id} type={'newBet'}>    
-             <small className='newData'>Nueva apuesta!</small>         
+             <small className='newData'>Nueva apuesta!</small>
+             <small className='timeToNew'>{timeToNew(dateCreatedBet)}</small>   
              <span className='infoUser'>
                <img src={users.imgUrl} alt="" className='imgUser'/>
                <h4>Usuario: {users.username}</h4>
@@ -68,10 +82,10 @@ const CardFeed = () => {
       const dateNow = new Date();
   
       news = feed.filter(prod => {
-          const dateProduct = new Date(prod.createdAt);
-          const diffInHours = Math.abs(dateNow - dateProduct) / 3600000;
-  
-          if (dateNow > dateProduct && diffInHours < 20) {
+          const dateNews = new Date(prod.createdAt);
+          const diffInHours = Math.abs(dateNow - dateNews) / 3600000;
+
+          if (dateNow > dateNews && diffInHours < 24) {
               return true;
           };
       })
@@ -93,8 +107,9 @@ const CardFeed = () => {
           return (
             <CardFeedContainerStyle key={newsElements._id} type={'newUser'}>
                     <small className='newData'>Nuevo miembro!</small>
+                    <small className='timeToNew'>{timeToNew(fecha)}</small>
                       <img src={newsElements.imgUrl} alt="" className='imgUser'/>
-                      <h4>{newsElements.username}</h4>
+                      <h4>Usuario: {newsElements.username}</h4>
                       <h4>Miembro desde: {fechaFormateada}</h4>
             </CardFeedContainerStyle>
           )

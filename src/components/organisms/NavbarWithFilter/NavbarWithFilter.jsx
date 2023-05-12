@@ -15,8 +15,8 @@ const NavbarWithFilter = () => {
   const { isOpenSubmenu, setIsOpenSubmenu } = useContext(ApiContext);
 
   const options = [
-    {value:165, label:'Copa Libertadores'},
-    {value:103, label:'Champions League'},
+    // {value:165, label:'Copa Libertadores'},
+    // {value:103, label:'Champions League'},
     {value:107, label:'Serie A'},
     {value:109, label:'League 1'},
     {value:152, label:'Liga Argentina'},

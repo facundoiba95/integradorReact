@@ -64,7 +64,7 @@ height:${props => {
         case 'newUser':
             return '50px'
         case 'newBet':
-            return '80px'
+            return '50px'
         default:
             return '130px'
     }
@@ -74,7 +74,7 @@ height:${props => {
         case 'newUser':
             return '50px'
         case 'newBet':
-            return '80px'
+            return '50px'
         default:
             return '130px'
     }
@@ -89,7 +89,7 @@ height:${props => {
         case 'newUser':
             return '15px'
         case 'newBet':
-            return '35px'
+            return '50px'
         default:
             return '130px'
     }
@@ -99,7 +99,7 @@ height:${props => {
         case 'newUser':
             return '-25px'
         case 'newBet':
-            return '-40px'
+            return '-25px'
         default:
             return '130px'
     }
@@ -111,6 +111,11 @@ height:${props => {
     top: 10px;
     right:10px;
     font-weight:800;
+}
+.timeToNew{
+    position:absolute;
+    top:35px;
+    right:10px;
 }
 
 .infoTeams{

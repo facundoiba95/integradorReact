@@ -16,11 +16,11 @@ const goLeagues = (e) => {
 
   return (
     <NavLeaguesStyle>
-        <NavLeaguesItemStyle onClick={(e) => goLeagues(e)} data-idleague='152'>LIGA ARGENTINA</NavLeaguesItemStyle>       
-        <NavLeaguesItemStyle onClick={(e) => goLeagues(e)} data-idleague='103'>CHAMPIONS LEAGUE</NavLeaguesItemStyle>
+        {/* <NavLeaguesItemStyle onClick={(e) => goLeagues(e)} data-idleague='152'>LIGA ARGENTINA</NavLeaguesItemStyle>        */}
+        {/* <NavLeaguesItemStyle onClick={(e) => goLeagues(e)} data-idleague='103'>CHAMPIONS LEAGUE</NavLeaguesItemStyle> */}
         <NavLeaguesItemStyle onClick={(e) => goLeagues(e)} data-idleague='109'>LIGUE 1</NavLeaguesItemStyle>
         <NavLeaguesItemStyle onClick={(e) => goLeagues(e)} data-idleague='107'>SERIE A</NavLeaguesItemStyle>
-        <NavLeaguesItemStyle onClick={(e) => goLeagues(e)} data-idleague='165'>COPA LIBERTADORES</NavLeaguesItemStyle>
+        {/* <NavLeaguesItemStyle onClick={(e) => goLeagues(e)} data-idleague='165'>COPA LIBERTADORES</NavLeaguesItemStyle> */}
         <NavLeaguesItemStyle onClick={(e) => goLeagues(e)} data-idleague='106'>PREMIER LEAGUE</NavLeaguesItemStyle>
         <NavLeaguesItemStyle onClick={(e) => goLeagues(e)} data-idleague='122'>LA LIGA</NavLeaguesItemStyle>
     </NavLeaguesStyle>

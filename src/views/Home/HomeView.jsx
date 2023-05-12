@@ -31,15 +31,7 @@ const HomeView = () => {
   //state ranking leagues
   const championsLeagueRanking = useSelector(state => state.apiLeagues.championsLeague);
   const libertadoresRanking = useSelector(state => state.apiLeagues.libertadores);
-/*
 
-      VERIFICAR SI LOS PARTIDOS SON DE LA FECHA ACTUAL
-
-      Si son de la fecha actual retornar y no hacer peticiones a Apis, 
-      caso contrario, hacer peticion a Apis para actualizar datos.
-
-      
-*/
 
    useEffect(() => {
   //   setInterval(()=> {
@@ -58,15 +50,15 @@ const HomeView = () => {
        {/* <MatchsRandom/> */}
        <NavbarLeagues/>   
        {/* <MatchsTodayLeagues titleLeague={'Liga Profesional Argentina'}  handleState={ligaArgentinaLocalStorage.length ? ligaArgentinaLocalStorage : ligaArgentina}/> */}
-       {/* <MatchsTodayLeagues titleLeague={'Premier League'} idLeague={2021} handleState={premierLeague}/>   */}
+       <MatchsTodayLeagues titleLeague={'Premier League'} idLeague={2021} handleState={premierLeague}/>  
        <MatchsTodayLeagues titleLeague={'Serie A'} idLeague={2019} handleState={serieA}/>
-       {/* <MatchsTodayLeagues titleLeague={'Liga Española'} idLeague={2014} handleState={laLiga}/>  */}
+       <MatchsTodayLeagues titleLeague={'Liga Española'} idLeague={2014} handleState={laLiga}/> 
        <Button handleFunction={goMatchs} title={'Ver mas ligas'}/>
 
        <div style={{marginTop:'3rem', marginBottom:'1rem'}}>
        <ContainerTables isAll={isAll}>
-         <RankingTable idLeague={103} />
-         <RankingTable idLeague={165} />
+         <RankingTable idLeague={107} />
+         <RankingTable idLeague={106} />
        </ContainerTables>
        </div>
        <Button handleFunction={goRanking} title={'Ver mas tablas'}/>

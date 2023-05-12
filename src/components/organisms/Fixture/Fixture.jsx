@@ -53,8 +53,6 @@ const Fixture = () => {
    useEffect(()=> {
      if(params.idLeague == 152){
       dispatch(fetchMatchesArgentina())
-      console.log(getMatchesArgentina);
-      console.log('renderizooo');
       return;
      } else {
       dispatch(fetchMatches(matchesLeague[params.idLeague]))

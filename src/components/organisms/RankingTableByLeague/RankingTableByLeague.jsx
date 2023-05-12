@@ -11,7 +11,6 @@ const RankingTableByLeague = () => {
     const params = useParams();
     const idLeague = params.idLeague;
     const { isAll, setIsAll } = useContext(ApiContext);
-    console.log(idLeague);
 
     const dispatch = useDispatch();
     const argentina = useSelector(state => state.apiScorers.scorersByLeagueArgentina);
@@ -21,10 +20,8 @@ const RankingTableByLeague = () => {
     useEffect(()=> { 
       if(idLeague === 152){
         dispatch(fetchScorersByLeagueArgentina());
-        console.log(argentina);
       } else {
         dispatch(fetchScorersByLeague(scorersStates[ params.idLeague ]))
-        console.log(leagues);
       }
    },[ params.idLeague ])
     
