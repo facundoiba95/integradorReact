@@ -20,6 +20,23 @@ z-index:1000;
     gap:20px;
     padding-left:10px;
     padding-right:10px;
+
+::-webkit-scrollbar {
+  width: 100%;   
+  height:5px;            /* width of the entire scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: none;   
+  height:5px;     /* color of the tracking area */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #80808090;    /* color of the scroll thumb */
+  border-radius: 5px; 
+  height:5px;      /* roundness of the scroll thumb */
+ /* creates padding around scroll thumb */
+}
 }
 `
 export const NavLeaguesItemStyle = styled.li`

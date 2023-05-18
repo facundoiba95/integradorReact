@@ -4,7 +4,7 @@ export const leagueStates = { // estos codigos son para la api de unidadeditoria
   103: "championsLeague",
   107: "serieA",
   109: "league1",
-  122: "laLiga",
+  101: "laLiga",
   152: "ligaArgentina"
 };
 

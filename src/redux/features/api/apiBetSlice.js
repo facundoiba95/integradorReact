@@ -1,7 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { useSelector } from "react-redux";
 
 const initialState = {
     bet: [],
+    checked:null,
+    dataBet:[],
     isLoading: false,
     status: null,
     error: null
@@ -59,11 +62,46 @@ export const getBets = createAsyncThunk(
     }
 )
 
+export const checkBet = createAsyncThunk(
+    'bets/checkBet',
+    async (idBet) => {
+        try {
+            const token = localStorage.getItem('token');
+            const searchBetted = await JSON.parse(localStorage.getItem('searchBetted'));
+            const searchBettedArg = await JSON.parse(localStorage.getItem('searchBettedArg'));
+
+            const dataMatchUpdated = searchBettedArg ? searchBettedArg : searchBetted;
+            const bet = JSON.stringify({idBet,dataMatchUpdated});
+
+                const req = await fetch(`${import.meta.env.VITE_URL_BACKEND}bets/checkBet`,{
+                    method: "POST",
+                    headers: {
+                        "Content-Type" : "application/json",
+                        "x-access-token": `${token}`
+                    },
+                    body: bet
+                })
+                const res = await req.json();
+
+   
+              localStorage.removeItem('searchBetted');
+              localStorage.removeItem('searchBettedArg');
+              return res.verificationResult;
+        } catch (error) {
+            console.log(error);
+            alert('Ocurrio un error al checkear la apuesta.')
+            return;
+        }
+    }
+)
+
 export const apiBetSlice = createSlice({
     name: 'apiBets',
     initialState,
     reducers:{},
     extraReducers: ( builder ) => {
+
+        // send bet
         builder.addCase(sendBet.rejected, ( state,action ) => {
             state.isLoading = false;
             state.error = action.error.message;
@@ -76,6 +114,7 @@ export const apiBetSlice = createSlice({
             state.bet = action.payload;
         })
 
+        // get bets
         builder.addCase(getBets.rejected, ( state,action ) => {
             state.isLoading = false;
             state.error = action.error.message;
@@ -87,6 +126,20 @@ export const apiBetSlice = createSlice({
             state.bet = action.payload;
             state.isLoading = false;
         })
+
+        // check Bets
+        builder.addCase(checkBet.rejected, ( state,action ) => {
+            state.isLoading = false;
+            state.error = action.error.message;
+        })
+        builder.addCase(checkBet.pending, ( state,action ) => {
+            state.isLoading = true;
+        })
+        builder.addCase(checkBet.fulfilled, ( state,action ) => {
+            state.dataBet = action.payload;
+            state.isLoading = false;
+        })
+
     }
 })
 

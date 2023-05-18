@@ -15,8 +15,15 @@ import ContainerTables from '../../components/molecules/ContainerTables/Containe
 
 const HomeView = () => {
   const navigator = useNavigate();;
-  const goMatchs = () => navigator('/matchs/leagues');
-  const goRanking = () => navigator('/ranking/leagues');
+  const goMatchs = () => { 
+    window.scrollTo(0,0)
+    navigator('/leagues/106/ranking');
+  }
+
+  const goRanking = () => { 
+    window.scrollTo(0,0)
+    navigator('/ranking/leagues');
+  }
   const isLoading = useSelector(state => state.apiMatches.isLoading);
   const { isAll, setIsAll } = useContext(ApiContext);
 
@@ -34,25 +41,18 @@ const HomeView = () => {
 
 
    useEffect(() => {
-  //   setInterval(()=> {
-  //     dispatch(fetchMatchesArgentina())
-  //  },900000)
-    setIsAll(true)
-    if(ligaArgentinaLocalStorage.length){
-      return;
-    } else {
-      // dispatch(fetchMatchesArgentina())
-    }
+    setIsAll(true) 
+    // dispatch(fetchMatchesArgentina())
    }, [])
 
   return (
     <>
        {/* <MatchsRandom/> */}
        <NavbarLeagues/>   
-       {/* <MatchsTodayLeagues titleLeague={'Liga Profesional Argentina'}  handleState={ligaArgentinaLocalStorage.length ? ligaArgentinaLocalStorage : ligaArgentina}/> */}
-       <MatchsTodayLeagues titleLeague={'Premier League'} idLeague={2021} handleState={premierLeague}/>  
+       {/* <MatchsTodayLeagues titleLeague={'Liga Profesional Argentina'}  handleState={ligaArgentina}/> */}
+       {/* <MatchsTodayLeagues titleLeague={'Premier League'} idLeague={2021} handleState={premierLeague}/>  
        <MatchsTodayLeagues titleLeague={'Serie A'} idLeague={2019} handleState={serieA}/>
-       <MatchsTodayLeagues titleLeague={'Liga Española'} idLeague={2014} handleState={laLiga}/> 
+       <MatchsTodayLeagues titleLeague={'Liga Española'} idLeague={2014} handleState={laLiga}/>  */}
        <Button handleFunction={goMatchs} title={'Ver mas ligas'}/>
 
        <div style={{marginTop:'3rem', marginBottom:'1rem'}}>

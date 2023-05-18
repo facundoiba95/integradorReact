@@ -11,6 +11,7 @@ const initialState= {
     laLiga:[],
     ligaArgentina: [],
     content:[],
+    searchMatch:[],
     isLoading: false,
     error: null
 }
@@ -165,7 +166,12 @@ export const fetchMatchesArgentina = createAsyncThunk(
 export const apiMatchesSlice = createSlice({
     name: 'apiMatches',
     initialState,
-    reducers: {},
+    reducers: {
+        setSearchMatch: ( state,action ) => {
+            state.searchMatch = action.payload;
+            return state;
+        }
+    },
     extraReducers: ( builder ) => {
         builder.addCase(fetchAllMatches.rejected, ( state,action ) => {
             state.isLoading = false;
@@ -229,5 +235,5 @@ export const apiMatchesSlice = createSlice({
         })
     }
 })
-
+export const { setSearchMatch } = apiMatchesSlice.actions;
 export default apiMatchesSlice.reducer;

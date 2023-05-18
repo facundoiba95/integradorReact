@@ -36,17 +36,15 @@ export const fetchScorersByLeagueArgentina = createAsyncThunk(
     'scorersByLeagueArgentina/fetchScorersByLeagueArgentina',
     async () => {
         try {
-            // const reqApi = await fetch(`${import.meta.env.VITE_URL_BACKEND}scorers/getScorersByLeagueArgentina`,{
-            //     method:"POST",
-            //     headers: {
-            //         "Content-Type": "application/json"
-            //     },
-            //     mode:'cors',
-            // })
+            const reqApi = await fetch(`${import.meta.env.VITE_URL_BACKEND}scorers/getScorersByLeagueArgentina`,{
+                method:"POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                mode:'cors',
+            })
             
-            // const resApi = await reqApi.json();
-            // localStorage.setItem('scorersLeagueArgentina', JSON.stringify(resApi))
-            const resApi = JSON.parse(localStorage.getItem('scorersLeagueArgentina'));
+            const resApi = await reqApi.json();
             return resApi;
         } catch (error) {
             console.log({error});

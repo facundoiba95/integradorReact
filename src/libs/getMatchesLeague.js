@@ -8,8 +8,17 @@ export const matchesLeague = {
     103: 2001,
     107: 2019,
     109: 2015,
-    122: 2014,
+    101: 2014,
     152: 128
+}
+export const matchesLeagueTwo = {
+  2021:106,
+  2152:165,
+  2001:103,
+  2019:107,
+  2015:109,
+  2014:101,
+  128:152
 }
 
 export const isCup = { // estos codigos son para la api football data

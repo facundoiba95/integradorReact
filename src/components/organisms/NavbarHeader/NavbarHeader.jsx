@@ -21,22 +21,23 @@ const NavbarHeader = () => {
   
   const goHome = () => {
     setIsOpenMenu(false)
+    window.scrollTo(0,0);
     navigator('/')
   }
   const goFeed = () => {
     setIsOpenMenu(false)
+    window.scrollTo(0,0);
     navigator('/feed')
   }
-  const goProde = () => {
-    setIsOpenMenu(false)
-    navigator('/prode')
-  }
+
   const goRegister = () => {
     setIsOpenMenu(false)
+    window.scrollTo(0,0);
     navigator('/register')
   }
   const goLogin = () => {
     setIsOpenMenu(false)
+    window.scrollTo(0,0);
     navigator('/login')
   }
 
@@ -72,7 +73,6 @@ const NavbarHeader = () => {
         <HeaderListStyle>
           <HeaderItemStyle onClick={goHome}>Home</HeaderItemStyle>
           <HeaderItemStyle onClick={goFeed}>Feed</HeaderItemStyle>
-          <HeaderItemStyle onClick={goProde}>Prode</HeaderItemStyle>
         </HeaderListStyle>
         <HeaderListStyle className='registerButtons'>
           <HeaderItemStyle onClick={goRegister} className='registerHeaderBtn'>Register</HeaderItemStyle>

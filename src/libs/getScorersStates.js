@@ -4,6 +4,6 @@ export const scorersStates = {  // codigos para api unidad editorial.org
     103: "CL",
     107: "SA",
     109: "FL1",
-    122: "PD",
+    101: "PD",
   };
   

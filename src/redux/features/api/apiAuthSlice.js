@@ -16,6 +16,7 @@ export const createUser = createAsyncThunk(
                 body: new FormData(form)
             })
            const res = await sendForm.json();
+           if(res.status == 200) alert('Se registro correctamente!. Por favor inicie sesión!')
            return res; 
     } catch (error) {
             console.log('Error en apiAuthSlice.js createuser AsyncThunk. Error: ', error);

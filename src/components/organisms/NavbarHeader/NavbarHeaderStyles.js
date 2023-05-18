@@ -106,6 +106,13 @@ h1{
             border-radius:3px;
         }
     }
+    
+    @media (max-width:600px) {
+        h1{
+            font-size:1.4rem;
+        }
+        
+    }
 }
 `
 

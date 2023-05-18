@@ -19,7 +19,7 @@ const ItemMatch = ({handleState,titleLeague,idLeague}) => {
               const { hour, date } = match;
               const teamHome = match.homeTeam === undefined ? match.teams.home.name : match.homeTeam.name;
               const teamAway = match.awayTeam === undefined ? match.teams.away.name : match.awayTeam.name;
-              const league = match.competition === undefined ? match.league.name : match.competition.name
+              const league = match.competition === undefined ? match.league.id : match.competition.id
               const homeScore = match.score.fullTime === undefined ? match.score.fulltime.home : match.score.fullTime.home ;
               const awayScore = match.score.fullTime === undefined ? match.score.fulltime.away : match.score.fullTime.away ;
               const imgHome = match.homeTeam ? match.homeTeam.crest : match.teams.home.logo;
@@ -27,7 +27,7 @@ const ItemMatch = ({handleState,titleLeague,idLeague}) => {
               const progress = match.fixture == undefined ? status[match.status] : status[match.fixture.status.short];
               const isBet = match.fixture == undefined ? match.status == 'TIMED' ? 'Apostar' : '' : match.fixture.status.short != 'FT' ?  'Apostar' : '';
               const idMatch = match.id || match.fixture.id ;
-
+              console.log(league);
               
               return (
                 <CardMatch 
@@ -35,7 +35,7 @@ const ItemMatch = ({handleState,titleLeague,idLeague}) => {
                   teamAway={teamAway}
                   hour={hour}
                   date={date}
-                  league={league}
+                  // league={league}
                   quantityBets={145}
                   success={true}
                   imgURLHome={imgHome}
@@ -45,6 +45,7 @@ const ItemMatch = ({handleState,titleLeague,idLeague}) => {
                   status={progress}
                   isBet={isBet}
                   idMatch={idMatch}
+                  idLeague={league}
                   key={uuidv4()}
                 />
               )

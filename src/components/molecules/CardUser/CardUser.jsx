@@ -8,8 +8,8 @@ import { BsCalendarDate } from 'react-icons/bs';
 import ModalAuth from '../Modal/Modal';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ApiContext } from '../../../context/ApiContext';
-import { getBets } from '../../../redux/features/api/apiBetSlice';
-import { fetchAllMatches, fetchMatches, fetchMatchesArgentina } from '../../../redux/features/api/apiMatchesSlice';
+import { checkBet, getBets } from '../../../redux/features/api/apiBetSlice';
+import { fetchAllMatches, fetchMatches, fetchMatchesArgentina, setSearchMatch } from '../../../redux/features/api/apiMatchesSlice';
 import Button from '../../atoms/Button/Button';
 
 
@@ -17,14 +17,17 @@ const CardUser = () => {
     const user = useSelector(state => state.apiAuth.user.sendUser);
     const isLogged = useSelector(state => state.apiAuth.isLogged);
     const isLoading = useSelector(state => state.apiMatches.isLoading);
+
     const bets = useSelector(state => state.apiBets.bet);
     const params = useParams();
     const navigator = useNavigate();
     const dispatch = useDispatch();
     const { isOpenModal, setIsOpenModal } = useContext(ApiContext);
     const [ idLeague, setIdLeague ] = useState(Number);
+    const matchSelectedToBet = useSelector(state => state.apiMatches.searchMatch);
     const selectLeague = useSelector(state => state.apiMatches);
-    const [ array, setArray ] = useState([]);
+    const betHitsSelected = useSelector(state => state.apiBets.dataBet);
+
     const goLogin = () => navigator('/login');
     const goRegister = () => navigator('/register');
 
@@ -73,28 +76,24 @@ const CardUser = () => {
       )
   } 
 
-  const renderWinner = (
-    searchBetted,
-    idMatch,
-    teamAway,
-    teamHome,
-    bettedFor
-  ) => {
+  const renderStateWinner = (betHit) => {
+    return  betHitsSelected.foundBetRequest_BDD == undefined
+      ? <small style={{color:'yellowgreen'}}><b>Acertaste!</b></small>
+      : <small style={{color:'orange'}}><b>No acertaste</b></small>
+      ? betHit == true
+      ? <small style={{color:'yellowgreen'}}><b>Acertaste!</b></small>
+      : <small style={{color:'orange'}}><b>No acertaste</b></small>    
+      : ''    
+    
+  }
+
+  const renderWinner = ( searchBetted,idMatch,betHit ) => {
     if (searchBetted[0] && searchBetted[0].id === idMatch) {
-      const winner =
-        searchBetted[0].score.winner == 'AWAY_TEAM'
-          ? teamAway
-          : searchBetted[0].score.winner == 'HOME_TEAM'
-          ? teamHome
-          : searchBetted[0].score.winner == 'DRAW'
-          ? 'Empate'
-          : '';
-      if (searchBetted[0].score.winner == null) return 'Por jugar.';
-      if (bettedFor === winner) {
-        return 'Acertaste';
-      } else {
-        return 'No acertaste';
-      }
+      localStorage.setItem('searchBetted', JSON.stringify(searchBetted));
+      return renderStateWinner(betHit)
+    } else if( searchBetted[0] && searchBetted[0].fixture.id === idMatch ){
+      localStorage.setItem('searchBettedArg', JSON.stringify(searchBetted));
+      return renderStateWinner(betHit)
      }
   }
       
@@ -104,22 +103,24 @@ const CardUser = () => {
 
       for (let i = 0; i < bets.length; i++) {
         const currentBet = bets[i];
+        const idBet = currentBet._id;
+        const checked = currentBet.checked;
+        const betHit = currentBet.betHit;
+
         currentBet.match.forEach(match => {
           const dateNow = new Date().toISOString();
           if(selectLeague == undefined){
             return;
           }
+
           const idLeagueBetted = match.competition == undefined ? match.league.id : match.competition.id;
           const { hour, date } = match;
           const teamHome = match.homeTeam === undefined ? match.teams.home.name : match.homeTeam.name;
           const teamAway = match.awayTeam === undefined ? match.teams.away.name : match.awayTeam.name;
           const league = match.competition === undefined ? match.league.name : match.competition.name
-          const homeScore = match.score.fullTime === undefined ? match.score.fulltime.home : match.score.fullTime.home ;
-          const awayScore = match.score.fullTime === undefined ? match.score.fulltime.away : match.score.fullTime.away ;
           const imgHome = match.homeTeam ? match.homeTeam.crest : match.teams.home.logo;
           const imgAway = match.awayTeam ? match.awayTeam.crest : match.teams.away.logo;
           const progress = match.utcDate == undefined ? dateNow < match.fixture.date ? 'Pendiente' : 'Finalizado' : dateNow < match.utcDate ? 'Pendiente' : 'Finalizado';
-          const isBet = match.fixture == undefined ? match.status == 'TIMED' ? 'Apostar' : '' :'HOLS';
           const idMatch = match.id == undefined ? match.fixture.id : match.id; 
           const bettedFor = currentBet.winner == 'AWAY_TEAM' ? teamAway : currentBet.winner == 'HOME_TEAM' ? teamHome : currentBet.winner == 'DRAW' ? 'Empate' : '';
           const isPending = match.utcDate == undefined ? dateNow < match.fixture.date : dateNow < match.utcDate;
@@ -130,8 +131,6 @@ const CardUser = () => {
           const newArray = leagueSelected.newArray;
           const searchBetted = newArray ? newArray.filter(match => match.fixture.id == idMatch) : 
                                           content ? content.filter(match => match.id == idMatch) : [];
-                                         
-                                    
           betItems.push(
             <li className='itemListBets' key={idMatch}>
               <span className='infoMatch'>
@@ -152,11 +151,22 @@ const CardUser = () => {
                 <p><b>Estado: </b>{progress}</p>
                 <p><b>Apostaste por: </b>{bettedFor}</p>
                 {
-                 isPending 
+                 isPending
                  ? <></>
-                 : <>
-                     <p><b>Resultado: </b>{isLoading ? 'Loading ...' : renderWinner( searchBetted,idMatch,teamAway,teamHome,bettedFor )}</p>
-                     <Button title={'Ver resultado'} handleFunction={() => getWinnerMatch(idLeagueBetted)} />
+                 : checked == true
+                 ? <>
+                     {
+                     betHit
+                     ? <small style={{color:'yellowgreen'}}><b>Acertaste!</b></small>
+                     : <small style={{color:'orange'}}><b>No acertaste</b></small>
+                     }  
+                   </>
+                 :
+                 <>
+                     {
+                     isLoading ?
+                      'Loading ...' : renderWinner( searchBetted,idMatch,betHit )}
+                     <Button title={'Ver resultado'} handleFunction={() => getWinnerMatch( idLeagueBetted, idBet, searchBetted )} />
                    </>
                 }
               </span>
@@ -169,21 +179,23 @@ const CardUser = () => {
       
     }
 
-    const getWinnerMatch = (idLeague) => {
+    const getWinnerMatch = async (idLeague,idBet) => {
       if(idLeague == 128){
-        dispatch(fetchMatchesArgentina());
+         await dispatch(fetchMatchesArgentina());
+         await dispatch(checkBet({idBet}));
+         await dispatch(getBets(user._id));
       } else if(idLeague != 128){
-        dispatch(fetchAllMatches(idLeague));
-      }
+        await dispatch(fetchAllMatches(idLeague)); 
+        await dispatch(checkBet({idBet}));
+        await dispatch(getBets(user._id));
     }
-    
-  
+  }
+     
     useEffect(() => {
       if(isLogged){
         dispatch(getBets(user._id));
       } 
     }, [ isLogged,dispatch,idLeague ])
-
 
   return (
     <CardUserContainerStyle>

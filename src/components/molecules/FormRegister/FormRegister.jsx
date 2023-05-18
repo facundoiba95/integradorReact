@@ -48,10 +48,6 @@ const FormRegister = () => {
         
     }
 
-
-    useEffect(() => {
-    }, [ user ])
-
   return (
      <FormContainerStyle id='createForm' name='createForm' onSubmit={(e) => sendRegister(e)}>
        <h3>Completá el registro</h3>

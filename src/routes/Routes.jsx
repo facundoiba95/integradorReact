@@ -10,10 +10,8 @@ import RankingView from '../views/Ranking/RankingView';
 import ProfileView from '../views/Profile/ProfileView';
 import FeedView from "../views/Feed/FeedView";
 import NavbarHeader from "../components/organisms/NavbarHeader/NavbarHeader";
-import Matchs from "../views/Matchs/Matchs";
 import Footer from "../components/organisms/Footer/Footer";
 import LeaguesView from "../views/Leagues/LeaguesView";
-import RankingTableByLeague from "../components/organisms/RankingTableByLeague/RankingTableByLeague";
 import Prode from "../views/Prode/Prode";
 
 const Routes = () => {
@@ -30,8 +28,6 @@ const Routes = () => {
         <Route path='/ranking/leagues' element={<RankingView/>}/>
         <Route path='/profile/:idUser' element={<ProfileView/>}/>
         <Route path='/feed' element={<FeedView/>}/>
-        <Route path='/matchs' element={<Matchs/>}/>
-        <Route path='/matchs/leagues' element={<Matchs/>}/>
         <Route path='/leagues/:idLeague/ranking' element={<LeaguesView/>}/>
         <Route path='/leagues/:idLeague/scorers' element={<LeaguesView/>}/>
         <Route path='/leagues/:idLeague/fixture' element={<LeaguesView/>}/>

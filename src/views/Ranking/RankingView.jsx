@@ -21,13 +21,11 @@ const RankingView = () => {
       setIsAll(!true);
        return (
          <>
-          {/* <RankingTable idLeague={106} handleState={premierLeagueranking}/>
-          <RankingTable idLeague={165} handleState={libertadoresranking}/>
-          <RankingTable idLeague={103} handleState={championsLeagueranking}/>
+          <RankingTable idLeague={106} handleState={premierLeagueranking}/>
           <RankingTable idLeague={107} handleState={serieAranking}/>
           <RankingTable idLeague={109} handleState={league1ranking}/>
-          <RankingTable idLeague={122} handleState={laLigaranking}/>
-          <RankingTable idLeague={152} handleState={ligaArgentinaranking}/> */}
+          <RankingTable idLeague={101} handleState={laLigaranking}/>
+          <RankingTable idLeague={152} handleState={ligaArgentinaranking}/>
          </>
        )
   }

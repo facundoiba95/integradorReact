@@ -3,9 +3,11 @@ import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { ContainerDefaultStyle } from '../Leagues/LeaguesViewStyles';
 import CardBet from '../../components/molecules/CardBet/CardBet';
+import Loader from '../../components/molecules/Loader/Loader';
 
 const Prode = () => {
   const params= useParams();
+  const isLoading = useSelector(state => state.apiMatches.isLoading);
   const leaguesState = useSelector(state => state.apiMatches[params.idLeague == 152 ? "ligaArgentina" : "matchesLeague"]);
   const rewriteResponse = leaguesState.rewriteResponse;
   const newArray = leaguesState.newArray;
@@ -40,7 +42,11 @@ const Prode = () => {
   
   return (
     <ContainerDefaultStyle>
-      {getMatch()}
+      {
+        isLoading 
+        ?  <Loader/>
+        : getMatch()
+      }
     </ContainerDefaultStyle>
   )
 }
