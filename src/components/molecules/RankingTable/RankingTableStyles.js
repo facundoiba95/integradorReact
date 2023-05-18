@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const ContainerTableStyle = styled.ul`
 width:100%;
 height:100%;
-min-width:390px;
+min-width:380px;
 display:flex;
 gap:10px;
 flex-direction:column;
@@ -62,12 +62,23 @@ margin:0 auto;
 
 @media (max-width:850px) {
     width:90%;
-    min-width:390px;
+    min-width:380px;
     .tableContainer{
         width:90%;
-        min-width:390px;
-        padding-left:5px;
+        min-width:380px;
+        padding-left:0px;
     }
+    .td.team{
+        small{
+        width:120px;
+        text-align:left;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;      
+        font-weight:300;  
+    }
+    }
+    
 }
 
 `

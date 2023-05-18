@@ -12,7 +12,6 @@ const CardMatch = ({
   hour, 
   date, 
   league, 
-  quantityBets,
   success,
   result,
   status,
@@ -65,9 +64,7 @@ const CardMatch = ({
               <p className='nameTeam'>{teamAway}</p>
             </span>
         </div>
-        <span className='containerBets'> 
-          <small>Bets: {quantityBets}</small>
-        </span>
+       
         <small className='goBet' data-idmatch={idMatch} data-idleague={idLeague} onClick={(e) => goProde(e)}>{isBet}</small>
     </CardContainerStyle>
   )

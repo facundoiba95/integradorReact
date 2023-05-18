@@ -30,16 +30,11 @@ const LoginView = () => {
   }
 
   /*
-         Opciones segun inicio de sesion o registro de usuario:
-           ** Al seleccionar una apuesta **:
-             - Seleccionar apuesta ---> isLogged ? * true: Realizar apuesta! ---> Okay!
-                                                   * false: Login ---> Okay ? 'Volver a apuesta' : 'Mostrar error';
-                                                   * false: Register ---> Okay ? 'Volver a apuesta' : 'Mostrar error' 
-              
+    
 
-             ** Al hacer click en 'Register' o 'Login' del Navbar Header **:
-                - Register ---> Okay ? '/profile/:idUser'
-                - Login ---> Okay ? /profile/:idUser
+
+  LANZAR ALERTAS DE ERRORES EN CASO DE HABERLOS
+  MANEJAR ERRORES
             
 
 */

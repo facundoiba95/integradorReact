@@ -4,7 +4,6 @@ import Select from 'react-select';
 export const NavbarFilterContainerStyles = styled.nav`
 width:100%;
 height:50px;
-background-color:red;
 position:fixed;
 top:70px;
 background-color:#2e2e2e10;
@@ -28,11 +27,11 @@ z-index: 1000;
   justify-content: right;
   padding-right:10px;
 
+
   .containerItemsNavbarFilter{
   position:absolute;
   top:50px;
-  background-color:#2e2e2e90;
-  backdrop-filter: blur(10px);
+  background-color:#2e2e2e;
   visibility: ${props => props.isOpenSubmenu ? 'visible' : 'hidden'};
   opacity:${props => props.isOpenSubmenu ? '1':'0'};
   flex-direction:row;
@@ -42,12 +41,13 @@ z-index: 1000;
   align-items:center;
   transition: all 0.2s ease-in-out;
   height:40px;
-
+  
 }
 .submenuIcon{
   display:block;
   width:25px;
   height:25px;
+  cursor: pointer;
 }
 }
 `

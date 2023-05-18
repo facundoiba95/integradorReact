@@ -19,7 +19,7 @@ h1{
 @media (max-width: 850px) {
 grid-template-columns: 1fr;
 width:90%;
-min-width:390px;
+min-width:380px;
 align-content:center;
 justify-content:center;
 }

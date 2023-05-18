@@ -59,7 +59,7 @@ margin: 0 auto;
 
 @media (max-width:850px){
     width:90%;
-    min-width:390px;
+    min-width:380px;
     margin:0 auto;
 }
 

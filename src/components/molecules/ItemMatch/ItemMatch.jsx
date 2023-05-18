@@ -35,7 +35,6 @@ const ItemMatch = ({handleState,titleLeague,idLeague}) => {
                   hour={hour}
                   date={date}
                   // league={league}
-                  quantityBets={145}
                   success={true}
                   imgURLHome={imgHome}
                   imgURLAway={imgAway}

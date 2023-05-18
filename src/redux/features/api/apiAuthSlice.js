@@ -85,19 +85,18 @@ export const apiAuthSlice = createSlice({
                 state.isLogged = true;
                 state.isLoading = false;
                 localStorage.setItem('token',action.payload.token)
-                console.log('Se inicio sesión con éxito');
                 break;
             case 404:
                 state.isLogged = false;
                 state.isLoading = false;
                 state.user = action.payload
-                console.log('Usuario no encontrado.');
+                alert('Usuario no encontrado!')
                 break;
             case 401:
                 state.isLogged = false;
                 state.isLoading = false;
                 state.user = action.payload
-                console.log('Contraseña incorrecta.');
+                alert('Contraseña incorrecta!')
                 break;
           }
        })
