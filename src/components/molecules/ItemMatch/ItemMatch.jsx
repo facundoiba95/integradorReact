@@ -27,7 +27,6 @@ const ItemMatch = ({handleState,titleLeague,idLeague}) => {
               const progress = match.fixture == undefined ? status[match.status] : status[match.fixture.status.short];
               const isBet = match.fixture == undefined ? match.status == 'TIMED' ? 'Apostar' : '' : match.fixture.status.short != 'FT' ?  'Apostar' : '';
               const idMatch = match.id || match.fixture.id ;
-              console.log(league);
               
               return (
                 <CardMatch 

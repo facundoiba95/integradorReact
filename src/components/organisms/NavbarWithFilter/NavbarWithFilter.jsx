@@ -21,7 +21,7 @@ const NavbarWithFilter = () => {
     {value:109, label:'League 1'},
     {value:152, label:'Liga Argentina'},
     {value:106, label:'Premier League'},
-    {value:122, label:'La Liga'}
+    {value:101, label:'La Liga'}
   ]
   const setValueDefault = options.find(league => league.value == param.idLeague);
   const routesNavBarFilter = {

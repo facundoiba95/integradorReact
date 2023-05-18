@@ -22,7 +22,7 @@ const goLeagues = (e) => {
         <NavLeaguesItemStyle onClick={(e) => goLeagues(e)} data-idleague='107'>SERIE A</NavLeaguesItemStyle>
         {/* <NavLeaguesItemStyle onClick={(e) => goLeagues(e)} data-idleague='165'>COPA LIBERTADORES</NavLeaguesItemStyle> */}
         <NavLeaguesItemStyle onClick={(e) => goLeagues(e)} data-idleague='106'>PREMIER LEAGUE</NavLeaguesItemStyle>
-        <NavLeaguesItemStyle onClick={(e) => goLeagues(e)} data-idleague='122'>LA LIGA</NavLeaguesItemStyle>
+        <NavLeaguesItemStyle onClick={(e) => goLeagues(e)} data-idleague='101'>LA LIGA</NavLeaguesItemStyle>
     </NavLeaguesStyle>
   )
 }

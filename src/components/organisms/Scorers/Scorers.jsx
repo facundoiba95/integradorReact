@@ -44,7 +44,6 @@ const Scorers = ({idLeague}) => {
   }
 
   useEffect(()=> {
-    console.log(idLeague); 
     idLeague === 152
     ? dispatch(fetchScorersByLeagueArgentina())
     : dispatch(fetchScorersByLeague(scorersStates[ idLeague ]))
