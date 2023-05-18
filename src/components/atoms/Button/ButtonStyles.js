@@ -13,7 +13,7 @@ display:flex;
 justify-content:center;
 align-items:center;
 cursor: pointer;
-
+font-family:'Red Hat Display';
 
 :active{
     font-weight:600;

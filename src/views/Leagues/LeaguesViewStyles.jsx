@@ -23,4 +23,15 @@ background-color:${props => props.isFeed ? '#80808010' : 'none'};
 .titleSeason{
     font-weight:100;
 }
+
+.titleFeed{
+    font-family:'Red Hat Display';
+    font-size:1.2rem;
+    text-align:center;
+    padding-top:20px;
+}
+.tricampeonTitle{
+    font-family:'Orbitron';
+    color:yellow;
+}
 `

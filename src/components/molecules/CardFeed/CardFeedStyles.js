@@ -10,6 +10,10 @@ justify-content:center;
 flex-direction:column;
 gap:40px;
 margin:40px 0;
+
+@media (max-width:850px) {
+    gap:70px;
+}
 `
 
 
@@ -135,7 +139,6 @@ height:${props => {
     justify-content:center;
     align-items:center;
     gap:10px;
-    
 }
 .nameTeam{
     width:150px;
@@ -147,6 +150,55 @@ height:${props => {
 }
 
 
+@media (max-width:850px) {
+    justify-content:flex-end;
+    padding-bottom:20px;
+    width:90%;
+    height:${props => {
+    switch (props.type){
+        case 'newUser':
+            return '120px'
+        case 'newBet':
+            return '220px'
+        default:
+            return '150px'
+    }
+}};
+    .infoTeams{
+        width:100%;
+    }
+    .newData{
+        background-color:white;
+        padding:2px;
+        top:-10px;
+        border-radius:3px;
+        color:black;
+        border:1px solid white;
+    }
+    .imgUser{
+        top:-25px;
+        left:50%;
+        transform: translate(-50%)
+    }
+    .timeToNew{
+        top:20px;
+    }
+    .teamsContainer{
+        width:100%;
+        flex-direction:column;
+        gap:5px;
+    }
+   
+    .team:nth-child(3){
+        flex-direction:row-reverse;
+    }
+    .nameTeam{
+        text-align:left;
+    }
+   
+
+    
+}
 
 
 `

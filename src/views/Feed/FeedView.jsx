@@ -7,7 +7,7 @@ const FeedView = () => {
 
   return (
     <ContainerDefaultStyle isFeed={true}>
-      <h2 className='titleSeason'>Novedades en Tricampeón</h2>
+      <h2 className='titleFeed'>Novedades en <h2 className='tricampeonTitle'>TRICAMPEÓN</h2></h2>
       <ContainerCardsFeedStyles>
         <CardFeed/>
       </ContainerCardsFeedStyles>

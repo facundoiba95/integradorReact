@@ -17,8 +17,10 @@ export const createUser = createAsyncThunk(
             })
            const res = await sendForm.json();
            if(res.status == 200) alert('Se registro correctamente!. Por favor inicie sesión!')
+           if(res.status == 203) alert('El usuario o email ya se encuentran registrados!');
            return res; 
     } catch (error) {
+        alert('Ocurrio un error inesperado!')
             console.log('Error en apiAuthSlice.js createuser AsyncThunk. Error: ', error);
         }
     }

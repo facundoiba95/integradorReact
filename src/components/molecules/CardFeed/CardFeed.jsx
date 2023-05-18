@@ -4,6 +4,7 @@ import imgDefault from '../../../assets/wallpapermessi.jpg'
 import { useDispatch, useSelector } from 'react-redux'
 import { getUsers } from '../../../redux/features/api/apiUserSlice'
 import { getBets } from '../../../redux/features/api/apiBetSlice'
+import NotNewsCard from '../NotNewsCard/NotNewsCard'
 
 const CardFeed = () => {
     const users = useSelector(state => state.apiUsers.users);
@@ -95,6 +96,9 @@ const CardFeed = () => {
 
     const renderNews = () => {
       getNews();
+      if(!news.length){
+        return <NotNewsCard/>
+      }
       return news.map(newsElements => {
         const fecha = new Date(newsElements.createdAt);
           const opciones = { 
