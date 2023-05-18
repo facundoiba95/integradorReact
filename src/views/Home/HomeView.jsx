@@ -50,9 +50,9 @@ const HomeView = () => {
        {/* <MatchsRandom/> */}
        <NavbarLeagues/>   
        {/* <MatchsTodayLeagues titleLeague={'Liga Profesional Argentina'}  handleState={ligaArgentina}/> */}
-       { premierLeague.length ? <MatchsTodayLeagues titleLeague={'Premier League'} idLeague={2021} handleState={premierLeague}/> : '' } 
-       { serieA.length ? <MatchsTodayLeagues titleLeague={'Serie A'} idLeague={2019} handleState={serieA}/> : ''}
-       { laLiga.length ? <MatchsTodayLeagues titleLeague={'Liga Española'} idLeague={2014} handleState={laLiga}/> : ''}
+       <MatchsTodayLeagues titleLeague={'Premier League'} idLeague={2021} handleState={premierLeague}/>
+       <MatchsTodayLeagues titleLeague={'Serie A'} idLeague={2019} handleState={serieA}/>
+       <MatchsTodayLeagues titleLeague={'Liga Española'} idLeague={2014} handleState={laLiga}/> 
        <Button handleFunction={goMatchs} title={'Ver mas ligas'}/>
 
        <div style={{marginTop:'3rem', marginBottom:'1rem'}}>
