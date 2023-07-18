@@ -13,6 +13,7 @@ export const createUser = createAsyncThunk(
         try {
             const sendForm = await fetch(`${import.meta.env.VITE_URL_BACKEND}users/createUser`,{
                 method: "POST",
+                mode:'cors',
                 body: new FormData(form)
             })
            const res = await sendForm.json();
