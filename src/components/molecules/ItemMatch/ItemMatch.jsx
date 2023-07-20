@@ -25,7 +25,7 @@ const ItemMatch = ({handleState,titleLeague,idLeague}) => {
               const imgHome = match.homeTeam ? match.homeTeam.crest : match.teams.home.logo;
               const imgAway = match.awayTeam ? match.awayTeam.crest : match.teams.away.logo;
               const progress = match.fixture == undefined ? status[match.status] : status[match.fixture.status.short];
-              const isBet = match.fixture == undefined ? match.status == 'TIMED' ? 'Apostar' : '' : match.fixture.status.short != 'FT' ?  'Apostar' : '';
+              const isBet = match.fixture == undefined ? match.status == 'TIMED' || 'SCHEDULED' ? 'Apostar' : '' : match.fixture.status.short != 'FT' ?  'Apostar' : '';
               const idMatch = match.id || match.fixture.id ;
               
               return (

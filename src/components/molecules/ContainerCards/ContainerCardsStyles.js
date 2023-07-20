@@ -10,4 +10,8 @@ justify-content:center;
 align-items:center;
 gap:10px;
 margin:1rem auto;
+
+p{
+    font-family:'Red Hat Display';
+}
 `

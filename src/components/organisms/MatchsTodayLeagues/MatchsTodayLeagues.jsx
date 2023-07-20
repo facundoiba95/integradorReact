@@ -22,7 +22,9 @@ const MatchsTodayLeagues = ({titleLeague, idLeague, handleState}) => {
     <ContainerCards >
         {isLoading 
         ? <Loader/>
-        : <ItemMatch handleState={handleState} titleLeague={'asd'} idLeague={idLeague}/>
+        : handleState.length
+        ? <ItemMatch handleState={handleState} titleLeague={'asd'} idLeague={idLeague}/>
+        : <p>No hay partidos en el dia de hoy en {titleLeague}!</p>
 }
     </ContainerCards>
     </>

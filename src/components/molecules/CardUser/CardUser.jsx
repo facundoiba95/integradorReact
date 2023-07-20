@@ -11,12 +11,14 @@ import { ApiContext } from '../../../context/ApiContext';
 import { checkBet, getBets } from '../../../redux/features/api/apiBetSlice';
 import { fetchAllMatches, fetchMatches, fetchMatchesArgentina, setSearchMatch } from '../../../redux/features/api/apiMatchesSlice';
 import Button from '../../atoms/Button/Button';
+import Loader from '../Loader/Loader';
 
 
 const CardUser = () => {
     const user = useSelector(state => state.apiAuth.user.sendUser);
     const isLogged = useSelector(state => state.apiAuth.isLogged);
     const isLoading = useSelector(state => state.apiMatches.isLoading);
+    const isLoadingBets = useSelector ( state => state.apiBets.isLoading );
 
     const bets = useSelector(state => state.apiBets.bet);
     const params = useParams();
@@ -70,7 +72,12 @@ const CardUser = () => {
             </ul>
             <h3>Apuestas realizadas</h3>
             <ul className='listBets'>
-              {bets ? renderBets() : 'Aun no has hecho apuestas!'}
+              {
+               isLoadingBets
+               ? <Loader/> 
+               : user 
+               ? renderBets()
+               : 'Aun no has hecho apuestas!'}
             </ul>
           </>
       )

@@ -46,6 +46,11 @@ h1{
         height:50px;
         border-radius:50%;
         object-fit:cover;
+        cursor: pointer;
+    }
+    
+    h4{
+        cursor: pointer;
     }
 }
 .btnLogout{
@@ -93,11 +98,8 @@ h1{
         img{
             width:150px;
             height:150px;
-            cursor: pointer;
         }
-        h4{
-            cursor: pointer;
-        }
+
 
         .btnLogout{
             width:100px;

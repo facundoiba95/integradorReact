@@ -80,7 +80,7 @@ const NavbarHeader = () => {
         </HeaderListStyle>
         <HeaderListStyle className='iconsAccount'>
           <h4 onClick={(e)=> goProfileUser(e)} data-iduser={isLogged ? user.sendUser._id : ''}>{isLogged ? user.sendUser.username : ''}</h4>
-          <img src={isLogged ? renderImg() : ''} alt="" onClick={(e)=> goProfileUser(e)} data-iduser={isLogged ? user.sendUser._id : ''}/>
+          <img src={isLogged ? renderImg() : ''} alt="" data-iduser={isLogged ? user.sendUser._id : ''} onClick={(e)=> goProfileUser(e)} />
           <Button title={'Cerrar sesión'} handleFunction={() => handleLogout()}/>
         </HeaderListStyle>
       </span>
