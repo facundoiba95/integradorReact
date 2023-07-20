@@ -1,17 +1,8 @@
 {
-    "routes": [
-      {
-        "src": "/api/(.*)",
-        "dest": "https://api.unidadeditorial.es/"
-      },
-      {
-        "src": "/footballapi/(.*)",
-        "dest": "https://api.football-data.org/v4/"
-      },
-      {
-        "src": "/leagueArgentina/(.*)",
-        "dest": "https://api-football-v1.p.rapidapi.com/v3/"
-      }
-    ]    
-  }
-  
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
