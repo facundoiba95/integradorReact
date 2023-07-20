@@ -50,24 +50,31 @@ const Scorers = ({idLeague}) => {
  },[ idLeague ])
 
   return (
- <TableContainerStyles>
-  <thead className='headTable'>
-    <tr className='head'>
-      <th className='th'>Rank</th>
-      <th className='th'>Jugador</th>
-      <th className='th'>Equipo</th>
-      <th className='th'>A</th>
-      <th className='th'>G</th>
-    </tr>
-  </thead>
-  <tbody className='tbody'>
+    <>
     {
-      isLoading
-      ? <Loader/>
-      : renderScorers(dataScore)
+      dataScore.length ?
+      <TableContainerStyles>
+        <thead className='headTable'>
+          <tr className='head'>
+            <th className='th'>Rank</th>
+            <th className='th'>Jugador</th>
+            <th className='th'>Equipo</th>
+            <th className='th'>A</th>
+            <th className='th'>G</th>
+          </tr>
+        </thead>
+        <tbody className='tbody'>
+          {
+            isLoading
+            ? <Loader/>
+            : renderScorers(dataScore)
+          }
+        </tbody>
+      </TableContainerStyles>
+      : <p>Aún no hay datos de goleadores en esta liga.</p>
     }
-  </tbody>
-</TableContainerStyles>
+    </>
+ 
   )
 }
 
